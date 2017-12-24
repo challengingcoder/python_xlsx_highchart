@@ -1,29 +1,21 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+pptxbuilder
 
-### What is this repository for? ###
+##SETUP
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+**Requirements: VirtualEnv with Python3**
 
-### How do I get set up? ###
+Create virtualenv on root path of project. `virtualenv -p python3 venv` And activate it `source venv/bin/activate`
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Install python requirements from requirements.txt `pip install -r requirements.txt`
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+####Run.py
 
-### Who do I talk to? ###
+run.py is main entry point for the project.
 
-* Repo owner or admin
-* Other community or team contact
+
+###TESTING
+
+Run `python run.py test` to start testing
