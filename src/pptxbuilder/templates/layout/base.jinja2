@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{% block title %}{{ _('PPTX Builder') }}{% endblock title %}</title>
+    <meta charset="utf-8">
+    {% block css %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/components-font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ s_url_for('css', 'style.css') }}">
+    {% endblock css %}
+
+    {% block meta %}
+
+    {% endblock meta %}
+</head>
+<body>
+{% block content %}{% endblock content %}
+{% block js %}
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/tether/dist/js/tether.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ s_url_for('js', 'global.js') }}"></script>
+{% endblock js %}
+</body>
+</html>

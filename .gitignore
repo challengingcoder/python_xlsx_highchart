@@ -1,5 +1,9 @@
 venv/
-.vscode/
+.idea/
 *.pyc
 .DS_Store
 ~$*.xlsx
+bower_components/
+flask_session/
+*.log
+*.sock

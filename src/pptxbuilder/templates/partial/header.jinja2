@@ -1,0 +1,18 @@
+{%- macro render() -%}
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if request.endpoint == 'home.index' else '' }}"
+                       href="{{ url_for('home.index') }}">{{ _('Home') }}</a>
+                </li>
+                {% if 'builder_flag' in session %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.endpoint.startswith('builder') else '' }}"
+                           href="{{ url_for('builder.index') }}">{{ _('Builder') }}</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <h3 class="text-muted">{{ _('PPTX Builder') }}</h3>
+    </div>
+{%- endmacro %}

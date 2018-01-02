@@ -1,0 +1,40 @@
+{% extends 'layout/base.jinja2' %}
+{% import 'partial/header.jinja2' as header %}
+
+{% block content %}
+    <div class="wrapper home">
+        {{ header.render() }}
+        <div class="explainer">
+            <div class="item"><span>{{ _('Upload your datafile <br> Xls, xlsx, mtd') }}</span></div>
+            <div class="item after"><span>&gt;</span></div>
+            <div class="item"><span>{{ _('Customise your slides') }}</span></div>
+            <div class="item after"><span>&gt;</span></div>
+            <div class="item"><span>{{ _('Download your PPTX') }}</span></div>
+        </div>
+        <div class="upload-area">
+            <div class="upload-icon">
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+            </div>
+            <p class="upload-text">{{ _('Drag and drop files here to start') }}</p>
+        </div>
+        <input type="file" name="the-file" id="the-file">
+        <!-- accept=".xlsx,.xls"-->
+        <div class="selected-file-area">
+            <div class="filename"></div>
+            <button type="button" class="btn btn-primary btn-next">{{ _('Next') }}</button>
+        </div>
+        <form class="upload-form" method="post" action="{{ url_for('builder.create') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="file">
+        </form>
+    </div>
+{% endblock content %}
+
+{% block css %}
+    {{ super() }}
+{% endblock css %}
+
+{% block js %}
+    {{ super() }}
+    <script src="{{ s_url_for('js', 'home.js') }}"></script>
+{% endblock js %}

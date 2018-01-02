@@ -1,0 +1,231 @@
+
+body {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.header {
+  padding-bottom: 1rem;
+  border-bottom: .05rem solid #e5e5e5;
+  margin-bottom: 20px;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 3rem;
+  }
+}
+
+.footer {
+  padding-top: 1.5rem;
+  color: #777;
+  border-top: .05rem solid #e5e5e5;
+}
+
+.wrapper {
+  width: 900px;
+  margin: 0 auto;
+}
+
+.wrapper.home {
+
+  .explainer {
+    margin: 50px 40px;
+    text-align: center;
+    .item {
+      display: inline-block;
+      width: 140px;
+      height: 100px;
+      line-height: 100px;
+      padding: 0 10px;
+      border-radius: 10px;
+      background: #eceeef;
+      color: #555556;
+      vertical-align: top;
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+      }
+
+      &.after {
+
+        width: 20px;
+        content: '>';
+        padding: 0;
+        border-radius: 0;
+        background: none;
+        font-size: 22px;
+        font-weight: bold;
+        color: #9d9d9f;
+
+      }
+    }
+  }
+
+  .upload-area {
+    text-align: center;
+    background: #eceeef;
+    color: #a9aaab;
+    border-radius: 6px;
+    box-sizing: border-box;
+    padding: 30px;
+    width: 480px;
+    margin: 0 auto 20px auto;
+
+    .upload-icon {
+      .fa {
+        font-size: 120px;
+      }
+    }
+
+    .upload-text {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      .upload-icon {
+        .fa {
+          color: #0275d8;
+        }
+      }
+    }
+
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .selected-file-area {
+    display: none;
+    text-align: center;
+    background: #eceeef;
+
+    border-radius: 6px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 400px;
+    margin: auto;
+    .filename {
+      color: #676768;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .upload-form {
+
+  }
+}
+
+.wrapper.builder {
+
+  .slides {
+    border-right: 1px solid #ccc;
+    overflow: auto;
+  }
+
+  .customization {
+    border-left: 1px solid #ccc;
+    float: right;
+  }
+
+  .chart {
+    height: 440px;
+  }
+
+  .download {
+    height: 60px;
+    border-top: 1px solid #ccc;
+  }
+
+  .slides, .customization, .chart, .download {
+    position: relative;
+    box-sizing: border-box;
+    background: #f6f6f6;
+  }
+
+  .slides, .customization {
+    width: 150px;
+    height: 500px;
+  }
+
+  .slides, .chart, .download {
+    float: left;
+  }
+
+  .chart, .download {
+    width: 600px;
+  }
+
+  .slides {
+    .title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      margin: 10px 0;
+    }
+
+    ol.slide-list {
+      padding: 0 8px 0 22px;
+      li {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 10px;
+        padding: 4px;
+        cursor: pointer;
+
+        .slide-item {
+          width: 110px;
+          height: 70px;
+          background: #fff;
+
+          .slide-name {
+            text-align: center;
+            font-size: 12px
+          }
+        }
+
+        &.selected {
+          color: #666;
+          background: #b4b4b4;
+        }
+      }
+    }
+  }
+
+  .customization {
+    .setting {
+      width: 90%;
+      margin: 10px auto 20px auto;
+      .key {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        color: #666;
+        margin: 5px 0;
+      }
+      .value {
+
+      }
+    }
+
+    .save-settings {
+      text-align: center;
+    }
+  }
+
+  .chart {
+    #chart-container {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}

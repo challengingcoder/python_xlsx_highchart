@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from xlrd import open_workbook, xldate_as_tuple
-
+from xlrd.biffh import XLRDError
 
 """
 Contains parser tools and relevant oop classes to convert excel files
@@ -52,7 +52,7 @@ class TableBundle(object):
         return self._tables
 
     def add_table(self, table):
-        if(self.get_table_by_name(table.name) is not None):
+        if (self.get_table_by_name(table.name) is not None):
             raise TableNameExistsError(
                 'Table "{}" exists in Bundle'.format(table.name))
 
@@ -114,7 +114,7 @@ class Table(object):
         return self._sections
 
     def add_section(self, section):
-        if(self.get_section_by_name(section.name) is not None):
+        if (self.get_section_by_name(section.name) is not None):
             raise TableNameExistsError(
                 'Section "{}" exists in Table'.format(section.name))
 
@@ -128,6 +128,8 @@ class Table(object):
     def to_dict(self):
         return {
             'name': self._name,
+            'question': self._question,
+            'options': self._options,
             'sections': [x.to_dict() for x in self._sections]
         }
 
@@ -149,7 +151,7 @@ class TableSection(object):
         return self._categories
 
     def add_category(self, category):
-        if(self.get_category_by_name(category.name) is not None):
+        if (self.get_category_by_name(category.name) is not None):
             raise TableNameExistsError(
                 'Category "{}" exists in Section'.format(category.name))
 
@@ -169,7 +171,6 @@ class TableSection(object):
 
 class SectionCategory(object):
     def __init__(self, category_name, values=[]):
-
         if not isinstance(values, list):
             raise TypeError('values must be list')
 
@@ -192,12 +193,17 @@ class SectionCategory(object):
         self._values = new_val
 
     def to_dict(self):
-        return {'name': self.name, 'values': self._values}
+        return {'name': self.name, 'data': self._values}
 
 
 class IncompatibleExcelException(Exception):
     def __init__(self, message):
         super(IncompatibleExcelException, self).__init__(message)
+
+
+class UnsupportedFileException(Exception):
+    def __init__(self, message):
+        super(UnsupportedFileException, self).__init__(message)
 
 
 def parse(filename):
@@ -208,7 +214,12 @@ def parse(filename):
 
     :returns: A TableBundle object that contains Tables from excel file given.
     """
-    workbook = open_workbook(filename)
+
+    try:
+        workbook = open_workbook(filename)
+    except XLRDError:
+        raise UnsupportedFileException('Unsupported file format')
+
     tables = [parse_worksheet(workbook.sheet_by_index(s))
               for s in range(workbook.nsheets)]
 
@@ -249,7 +260,7 @@ def parse_worksheet(worksheet):
 
         if force_datetime and isinstance(val, float):
             # 42738.0
-            if(len(str(val)) >= 7):
+            if (len(str(val)) >= 7):
                 try:
                     val_date = datetime(
                         *xldate_as_tuple(val, worksheet.book.datemode))
