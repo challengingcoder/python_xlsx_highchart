@@ -1,1 +1,1 @@
-web: script/web-gunicorn
+web: sh script/web-gunicorn
