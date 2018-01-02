@@ -1,0 +1,32 @@
+#!/bin/bash
+
+PWD_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+BASE_DIR="$PWD_DIR/../"
+SRC_DIR="$PWD_DIR/../src"
+VENVDIR="$PWD_DIR/../venv"
+
+cd $VENVDIR
+source bin/activate
+
+export PYTHONPATH=$SRC_DIR
+
+cd "$SRC_DIR/pptxbuilder"
+
+NAME="pptxbuilder_web"
+SOCKFILE="$BASE_DIR/pptxbuilder_web.sock"
+ERROR_LOG_FILE="$BASE_DIR/pptxbuilder_web.log"
+
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+NUM_WORKERS=4
+TIMEOUT=10
+
+# Start gunicorn
+exec gunicorn app:app -b 0.0.0.0:5000 \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --error-logfile $ERROR_LOG_FILE \
+  --bind=unix:$SOCKFILE
