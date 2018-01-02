@@ -7,4 +7,4 @@ SRC_DIR="$PWD_DIR/../src"
 
 export PYTHONPATH=$SRC_DIR
 
-gunicorn app:app
+exec gunicorn app:app
