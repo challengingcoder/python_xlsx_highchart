@@ -1,1 +1,1 @@
-web: sh script/web-gunicorn
+web: sh script/web-heroku
