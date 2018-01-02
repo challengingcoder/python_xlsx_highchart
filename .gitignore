@@ -1,9 +1,10 @@
-venv/
-.idea/
+venv
+.idea
 *.pyc
 .DS_Store
 ~$*.xlsx
-bower_components/
-flask_session/
+bower_components
+flask_session
 *.log
 *.sock
+node_modules
