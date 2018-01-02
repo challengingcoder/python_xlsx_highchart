@@ -6,6 +6,6 @@ SRC_DIR="./src"
 
 export PYTHONPATH=$SRC_DIR
 
-cd ".src/pptxbuilder"
+cd "./src/pptxbuilder"
 
 gunicorn app:app
