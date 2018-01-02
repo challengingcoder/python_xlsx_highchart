@@ -2,12 +2,10 @@
 
 PWD_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-SRC_DIR="$PWD_DIR/../src"
-
-echo $SRC_DIR
+SRC_DIR="./src"
 
 export PYTHONPATH=$SRC_DIR
 
-cd "$SRC_DIR/pptxbuilder"
+cd ".src/pptxbuilder"
 
 gunicorn app:app
