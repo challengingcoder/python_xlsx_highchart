@@ -37,6 +37,9 @@ $(function () {
             series = resp.data_by_options[crossBreakIndex];
         }
 
+        console.log(categories);
+        console.log(series)
+
         var chartObj = null;
         if (chartType === CHART_TYPE_BAR) {
             chartObj = chartObjBar(title, categories, series, 'bar');
@@ -72,10 +75,28 @@ var chartObjBar = function (title, categories, seriesData, type) {
                 text: null
             }
         },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
         plotOptions: {
             bar: {
                 dataLabels: {
-                    enabled: true
+                    enabled: true,
+                    format: "{y}%"
+                }
+            },
+            line: {
+                dataLabels: {
+                    enabled: true,
+                    format: "{y}%"
+                }
+            },
+            column: {
+                dataLabels: {
+                    enabled: true,
+                    format: "{y}%"
                 }
             }
         },
