@@ -8,11 +8,15 @@ from flask import jsonify
 from flask.views import MethodView
 
 from pptxbuilder.constants import *
-from pptxbuilder.excel_parser import parse, UnsupportedFileException
-from pptxbuilder.helper import str_chart_type
+from pptxbuilder.excel_parser import parse, UnsupportedFileException, IncompatibleExcelException
+from pptxbuilder.helper import str_chart_type, str_series_opt
 from pptxbuilder.util import random_alphanum
 
 builder_bp = Blueprint('builder', __name__)
+
+builder_bp.add_app_template_global(SERIES_BY_CATEGORIES, name='SERIES_BY_CATEGORIES')
+builder_bp.add_app_template_global(SERIES_BY_OPTIONS, name='SERIES_BY_OPTIONS')
+builder_bp.add_app_template_global(str_series_opt)
 
 builder_bp.add_app_template_global(CHART_TYPE_BAR, name='CHART_TYPE_BAR')
 builder_bp.add_app_template_global(CHART_TYPE_COLUMN, name='CHART_TYPE_COLUMN')
@@ -40,6 +44,8 @@ class Create(MethodView):
             bundle = parse(save_path)
         except UnsupportedFileException:
             abort(406, 'Unsupported file format')
+        except IncompatibleExcelException as ex:
+            abort(406, str(ex))
         finally:
             os.remove(save_path)
 
@@ -47,7 +53,8 @@ class Create(MethodView):
         for table in tables:
             table['view_settings'] = {
                 'cross_break': 0,
-                'chart_type': CHART_TYPE_BAR
+                'chart_type': CHART_TYPE_BAR,
+                'series_by': SERIES_BY_CATEGORIES
             }
 
         session['tables'] = tables
@@ -87,9 +94,13 @@ class TableAtIndex(MethodView):
     def post(self, table_index):
         cross_break = request.form.get('cross-break', type=int)
         chart_type = request.form.get('chart-type', type=int)
+        series_by = request.form.get('series-by', type=int)
 
         if chart_type not in [CHART_TYPE_BAR, CHART_TYPE_COLUMN, CHART_TYPE_LINE, CHART_TYPE_PIE]:
             abort(400, _('Invalid chart type'))
+
+        if series_by not in [SERIES_BY_CATEGORIES, SERIES_BY_OPTIONS]:
+            abort(400, _('Invalid series option'))
 
         try:
             session['tables'][table_index]['sections'][cross_break]
@@ -103,6 +114,7 @@ class TableAtIndex(MethodView):
 
         table['view_settings']['cross_break'] = cross_break
         table['view_settings']['chart_type'] = chart_type
+        table['view_settings']['series_by'] = series_by
 
         return redirect(url_for('builder.table', table_index=table_index))
 

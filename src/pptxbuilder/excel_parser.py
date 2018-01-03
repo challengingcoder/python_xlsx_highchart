@@ -4,10 +4,7 @@ from xlrd import open_workbook, xldate_as_tuple
 from xlrd.biffh import XLRDError
 
 """
-Contains parser tools and relevant oop classes to convert excel files
-to a certain format.
-
-Instructions:
+Contains parser tools and relevant oop classes to convert excel files to a certain format.
 
 - Table Bundle
 Holds one or more tables.
@@ -23,7 +20,7 @@ There are 3 sections below. Total, Gender and Age.
 
 - Section Category
 +--------+
-| Male   | -> Categories name
+| Male   | -> Category name
 | 27%    | -> Category values
 | 27%    |
 | 27%    |
@@ -33,9 +30,9 @@ There are 3 sections below. Total, Gender and Age.
 """
 
 
-class TableNameExistsError(Exception):
+class NameExistsError(Exception):
     def __init__(self, message=''):
-        super(TableNameExistsError, self).__init__(message)
+        super(NameExistsError, self).__init__(message)
 
 
 class TableBundle(object):
@@ -53,7 +50,7 @@ class TableBundle(object):
 
     def add_table(self, table):
         if (self.get_table_by_name(table.name) is not None):
-            raise TableNameExistsError(
+            raise NameExistsError(
                 'Table "{}" exists in Bundle'.format(table.name))
 
         self._tables.append(table)
@@ -115,7 +112,7 @@ class Table(object):
 
     def add_section(self, section):
         if (self.get_section_by_name(section.name) is not None):
-            raise TableNameExistsError(
+            raise NameExistsError(
                 'Section "{}" exists in Table'.format(section.name))
 
         self._sections.append(section)
@@ -130,8 +127,32 @@ class Table(object):
             'name': self._name,
             'question': self._question,
             'options': self._options,
-            'sections': [x.to_dict() for x in self._sections]
+            'sections': [x.to_dict() for x in self._sections],
+            'data_by_options': self.data_by_options()
         }
+
+    def data_by_options(self):
+        data = []
+        s = 0
+        for section in self._sections:
+            v = []
+            o = 0
+            for opt in self._options:
+                k = {'name': opt, 'data': []}
+                categories = section.to_dict()['categories']
+                c = 0
+                for cat in categories:
+                    try:
+                        k['data'].append(cat['data'][o])
+                    except IndexError:
+                        pass
+                    c += 1
+                v.append(k)
+                o += 1
+            data.append(v)
+            s += 1
+
+        return data
 
 
 class TableSection(object):
@@ -152,7 +173,7 @@ class TableSection(object):
 
     def add_category(self, category):
         if (self.get_category_by_name(category.name) is not None):
-            raise TableNameExistsError(
+            raise NameExistsError(
                 'Category "{}" exists in Section'.format(category.name))
 
         self._categories.append(category)
@@ -172,7 +193,7 @@ class TableSection(object):
 class SectionCategory(object):
     def __init__(self, category_name, values=[]):
         if not isinstance(values, list):
-            raise TypeError('values must be list')
+            raise TypeError('Values must be list!')
 
         self._name = category_name
         self._values = values
@@ -243,12 +264,14 @@ def parse_worksheet(worksheet):
     # Column count of worksheet
     worksheet_cols = worksheet.ncols
 
-    def cell_value(r, c, force_datetime=False):
+    def cell_value(r, c, force_datetime=False, multiple_float=None):
         """
         Shortcut function to get value by row and column numbers.
 
         :param r: Row number
         :param c: Column number
+        :param force_datetime: Default False. When it True trys convert cell data to datetime object
+        :param multiple_float:
         """
         val = worksheet.cell_value(rowx=r, colx=c)
 
@@ -257,6 +280,10 @@ def parse_worksheet(worksheet):
             val = val.strip()
             if val == '-':
                 val = None
+
+        if multiple_float is not None and isinstance(val, float):
+            if str(val).startswith('0.'):
+                val = round(val * multiple_float)
 
         if force_datetime and isinstance(val, float):
             # 42738.0
@@ -280,7 +307,7 @@ def parse_worksheet(worksheet):
         question = cell_value(2, 0)
         assert question != ''
     except (IndexError, AssertionError):
-        raise IncompatibleExcelException('Question of table not found at A3!')
+        raise IncompatibleExcelException('Question of table not found at A3! Worksheet: {}'.format(worksheet.name))
 
     """
     Options of table. Parse from B3 to end of worksheet.
@@ -298,7 +325,7 @@ def parse_worksheet(worksheet):
     worksheet rows count.
     """
     if (len(options) + 2) != worksheet_rows:
-        raise IncompatibleExcelException('Incompatible table format!')
+        raise IncompatibleExcelException('Options are not in expected position! Worksheet: {}'.format(worksheet.name))
 
     """
     Find section starting column numbers.
@@ -306,10 +333,16 @@ def parse_worksheet(worksheet):
     e.g. [2, 3, 5, 10, 14, 18, 22]
     """
     section_indices = []
+    used_section_names = []
     for i in range(2, worksheet_cols):
-        # if next column content is empty, it means this section ended.
-        if cell_value(0, i).strip() != '':
+        # if next column content is empty or duplicate name (can be in merged cells), it means this section ended.
+        c_v = cell_value(0, i)
+        if c_v != '' and c_v not in used_section_names:
             section_indices.append(i)
+            used_section_names.append(c_v)
+
+    if len(section_indices) == 0:
+        raise IncompatibleExcelException('No section found! Worksheet: {}'.format(worksheet.name))
 
     """
     Generate section boundaries.
@@ -345,8 +378,14 @@ def parse_worksheet(worksheet):
 
         for m in range(sect_len):
             cat_name = cell_value(1, sect_starts, True)
-            cat_vals = [cell_value(r, sect_starts)
-                        for r in range(2, worksheet_rows)]
+            cat_vals = [cell_value(r, sect_starts, multiple_float=100) for r in range(2, worksheet_rows)]
+
+            if isinstance(cat_name, int) or isinstance(cat_name, float):
+                cat_name = str(cat_name)
+
+            if cat_name.strip() == '':
+                raise IncompatibleExcelException(
+                    'Category name can not be empty! Worksheet: {}, Section: {}'.format(worksheet.name, section_name))
 
             new_cat = SectionCategory(cat_name, cat_vals)
             new_section.add_category(new_cat)

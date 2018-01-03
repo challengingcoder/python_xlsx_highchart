@@ -2,7 +2,7 @@ import os
 import unittest
 
 from pptxbuilder.excel_parser import (SectionCategory, Table, TableBundle,
-                                      TableNameExistsError, TableSection,
+                                      NameExistsError, TableSection,
                                       parse)
 
 
@@ -31,7 +31,7 @@ class ExcelParserTestCase(unittest.TestCase):
 
         # SectionCategory.to_dict test
         self.assertIsInstance(sect1_cat1.to_dict(), dict)
-        self.assertEquals(len(sect1_cat1.to_dict()['values']), 3)
+        self.assertEquals(len(sect1_cat1.to_dict()['data']), 3)
 
         sect1.add_category(sect1_cat1)
 
@@ -54,9 +54,9 @@ class ExcelParserTestCase(unittest.TestCase):
         sect2.add_category(sect2_cat2)
 
         self.assertEquals(len(sect2.categories), 2)
-        self.assertRaises(TableNameExistsError, sect2.add_category, sect2_cat1)
+        self.assertRaises(NameExistsError, sect2.add_category, sect2_cat1)
         self.assertRaisesRegex(
-            TableNameExistsError, 'Category "*.*" exists in Section', sect2.add_category, sect2_cat1)
+            NameExistsError, 'Category "*.*" exists in Section', sect2.add_category, sect2_cat1)
 
         # TableSection.to_dict test
         self.assertIsInstance(sect2.to_dict(), dict)
@@ -84,9 +84,9 @@ class ExcelParserTestCase(unittest.TestCase):
         # Table.add_section test
         table1.add_section(sect1)
         table1.add_section(sect2)
-        self.assertRaises(TableNameExistsError, table1.add_section, sect1)
+        self.assertRaises(NameExistsError, table1.add_section, sect1)
         self.assertRaisesRegex(
-            TableNameExistsError, 'Section "*.*" exists in Table', table1.add_section, sect1)
+            NameExistsError, 'Section "*.*" exists in Table', table1.add_section, sect1)
 
         # Table.sections test
         self.assertIsInstance(table1.sections, list)
@@ -111,9 +111,9 @@ class ExcelParserTestCase(unittest.TestCase):
 
         # TableBundle.add_table test
         bundle.add_table(table1)
-        self.assertRaises(TableNameExistsError, bundle.add_table, table1)
+        self.assertRaises(NameExistsError, bundle.add_table, table1)
         self.assertRaisesRegex(
-            TableNameExistsError, 'Table "*.*" exists in Bundle', bundle.add_table, table1)
+            NameExistsError, 'Table "*.*" exists in Bundle', bundle.add_table, table1)
 
         # TableBundle.tables test
         self.assertIsInstance(bundle.tables, list)
@@ -129,7 +129,7 @@ class ExcelParserTestCase(unittest.TestCase):
         self.assertEquals(
             bundle.to_dict()['tables'][0]['sections'][1]['name'], 'Gender')
         self.assertEquals(bundle.to_dict()[
-                          'tables'][0]['sections'][1]['categories'][1]['name'], 'Female')
+                              'tables'][0]['sections'][1]['categories'][1]['name'], 'Female')
 
         # ----------------------------------------------------- #
 
@@ -147,39 +147,40 @@ class ExcelParserTestCase(unittest.TestCase):
         # Table question test
         table_question = bundle.get_table_by_name('Table 1').question
         self.assertEquals(
-            table_question, 'Q1. Do you have a social media account (such as Facebook or Twitter) that you have used in the last year?')
+            table_question,
+            'Q1. Do you have a social media account (such as Facebook or Twitter) that you have used in the last year?')
 
         # Table options test
         table_options = bundle.get_table_by_name('Table 1').options
         self.assertEquals(table_options, ['Yes', 'No', 'Don’t know'])
 
         # Random test 1
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Age')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Age') \
             .get_category_by_name('25-34').values
         self.assertEquals(values, [20.7, 20.7, 20.7])
 
         # Random test 2
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Social grade')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Social grade') \
             .get_category_by_name('C1').values
         self.assertEquals(values, [None, None, 16.6])
 
         # Random test 3
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Region (4 code scale)')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Region (4 code scale)') \
             .get_category_by_name('West').values
         self.assertEquals(values, [12.3, 12.3, 12.3])
 
         # Random test 4
-        values = bundle.get_table_by_name('Table 2')\
-            .get_section_by_name('Employment status')\
+        values = bundle.get_table_by_name('Table 2') \
+            .get_section_by_name('Employment status') \
             .get_category_by_name('Part-time').values
         self.assertEquals(values, [13.4, 13.4, 13.4, 13.4, 13.4])
 
         # Random test 5
-        values = bundle.get_table_by_name('Table 2')\
-            .get_section_by_name('Education')\
+        values = bundle.get_table_by_name('Table 2') \
+            .get_section_by_name('Education') \
             .get_category_by_name('Degree/Masters/PhD').values
         self.assertEquals(values, [17.6, 17.6, 99.0, 11.0, 17.6])
 
@@ -187,7 +188,7 @@ class ExcelParserTestCase(unittest.TestCase):
         # find Education -> No formal qualifications category
         cat = bundle.to_dict()['tables'][1]['sections'][5]['categories'][3]
         self.assertEquals(cat['name'], 'No formal qualifications')
-        self.assertEquals(cat['values'], [16.6, 16.6, 16.6, 16.6, 16.6])
+        self.assertEquals(cat['data'], [16.6, 16.6, 16.6, 16.6, 16.6])
 
     def test_00_test_parse_2(self):
         xlsx_dir = os.path.join(self.cur_dir, 'xls', '2.xlsx')
@@ -204,43 +205,66 @@ class ExcelParserTestCase(unittest.TestCase):
         self.assertEquals(table_options, ['Yes', 'No', 'Don’t know'])
 
         # Random test 1
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Total')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Total') \
             .get_category_by_name('All').values
         self.assertEquals(values, [17.5, 1, 17.5])
 
         # Random test 2
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Social grade')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Social grade') \
             .get_category_by_name('C2').values
         self.assertEquals(values, [11.5, 11.5, 11.5])
 
         # Random test 3
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Wave 1')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Wave 1') \
             .get_category_by_name('February').values
         self.assertEquals(values, [55, None, 58])
 
         # Random test 4
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Wave 2')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Wave 2') \
             .get_category_by_name('2017-01-02').values
         self.assertEquals(values, [55, 65, 58])
 
         # Random test 5
-        values = bundle.get_table_by_name('Table 1')\
-            .get_section_by_name('Wave 2')\
+        values = bundle.get_table_by_name('Table 1') \
+            .get_section_by_name('Wave 2') \
             .get_category_by_name('2017-01-03').values
         self.assertEquals(values, [25, 11, 23])
 
         # Random test 6
-        values = bundle.get_table_by_name('Table 2')\
-            .get_section_by_name('Wave 1')\
+        values = bundle.get_table_by_name('Table 2') \
+            .get_section_by_name('Wave 1') \
             .get_category_by_name('March').values
-        self.assertEquals(values, [0, 0.11, 23, 23, 23])
+        self.assertEquals(values, [0, 11, 23, 23, 23])
 
         # to_dict test
         # find gender -> female category
         cat = bundle.to_dict()['tables'][0]['sections'][1]['categories'][1]
         self.assertEquals(cat['name'], 'Female')
-        self.assertEquals(cat['values'], [23.4, 0.0, 23.4])
+        self.assertEquals(cat['data'], [23.4, 0.0, 23.4])
+
+
+
+    def test_00_test_parse_3(self):
+        # Table.data_by_options test
+        xlsx_dir = os.path.join(self.cur_dir, 'xls', '1.xlsx')
+
+        bundle = parse(xlsx_dir)
+        table = bundle.get_table_by_name('Table 1')
+        data = table.data_by_options()
+
+        self.assertEqual(data[0][0]['name'], "Yes")
+        self.assertEqual(data[5][1]['name'], "No")
+        self.assertEqual(data[6][2]['name'], "Don’t know")
+
+        # Yes -> Total
+        self.assertEqual(data[0][0]['data'], [17.5])
+
+        # No -> Age
+        self.assertEqual(data[2][1]['data'], [13.7, 20.7, 100.0, 11.5, 22.6])
+
+        # Don’t know -> Employment status
+        self.assertEqual(data[6][2]['data'], [15.1, 10.4, 11.9, 16.7, 22.5])

@@ -4,54 +4,81 @@
 {% block content %}
     <div class="wrapper builder">
         {{ header.render() }}
-        <div class="slides">
-            <div class="title">{{ _('Slides') }}</div>
-            <ol class="slide-list">
-                {% set i = [0] %}
-                {% for table in tables %}
-                    <li data-index="{{ i[0] }}" {{ 'class="selected"' if index == i[0] else '' }}>
-                        <div class="slide-item">
-                            <div class="slide-name">{{ table['name'] }}</div>
+
+        <div class="builder-area">
+            <div class="slides">
+                <div class="title">{{ _('Slides') }}</div>
+                <ol class="slide-list">
+                    {% set i = [0] %}
+                    {% for table_ in tables %}
+                        <li data-index="{{ i[0] }}"
+                            id="item-{{ i[0] }}" {{ 'class="selected"' if index == i[0] else '' }}>
+                            <div class="slide-item">
+                                <div class="slide-name">{{ table_['name']|truncate(10, True, '') }}</div>
+                                <div class="slide-info">
+                                    {{ table_['sections'][table_['view_settings']['cross_break']]['name']|truncate(8, True, '') }}
+                                    <span>|</span>
+                                    {{ str_chart_type(table_['view_settings']['chart_type']) }}</div>
+                            </div>
+                        </li>
+                        {% if i.append(i.pop() + 1) %}{% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="chart">
+                <div id="chart-container"></div>
+            </div>
+            <div class="customization">
+                <form method="post">
+                    <div class="setting cross-break">
+                        <div class="key">{{ _('Crossbreak') }}</div>
+                        <div class="value">
+                            <select class="form-control form-control-sm input-cross-break" name="cross-break">
+                                {%- set i = [0] -%}
+                                {%- for section in table['sections'] %}
+                                    <option{{ ' selected' if i[0]==table['view_settings']['cross_break'] else '' }}
+                                            value="{{ i[0] }}">{{ section['name'] }}</option>
+                                    {%- if i.append(i.pop() + 1) %}{% endif -%}
+                                {%- endfor %}
+                            </select>
                         </div>
-                    </li>
-                    {% if i.append(i.pop() + 1) %}{% endif %}
-                {% endfor %}
-            </ol>
-        </div>
-        <div class="chart"><div id="chart-container"></div></div>
-        <div class="customization">
-            <form method="post">
-                <div class="setting cross-break">
-                    <div class="key">{{ _('Crossbreak') }}</div>
-                    <div class="value">
-                        <select class="form-control form-control-sm input-cross-break" name="cross-break">
-                            {%- set i = [0] -%}
-                            {%- for section in table['sections'] %}
-                                <option{{ ' selected' if i[0]==table['view_settings']['cross_break'] else '' }} value="{{ i[0] }}">{{ section['name'] }}</option>
-                                {%- if i.append(i.pop() + 1) %}{% endif -%}
-                            {%- endfor %}
-                        </select>
                     </div>
-                </div>
-                <div class="setting chart-type">
-                    <div class="key">{{ _('Chart Type') }}</div>
-                    <div class="value">
-                        <select class="form-control form-control-sm input-chart-type" name="chart-type">
-                            {%- for i in [CHART_TYPE_BAR, CHART_TYPE_COLUMN,CHART_TYPE_LINE, CHART_TYPE_PIE] %}
-                                <option{{ ' selected' if i==table['view_settings']['chart_type'] else '' }} value="{{ i }}">{{ str_chart_type(i) }}</option>
-                            {%- endfor %}
-                        </select>
+                    <div class="setting chart-type">
+                        <div class="key">{{ _('Chart Type') }}</div>
+                        <div class="value">
+                            <select class="form-control form-control-sm input-chart-type" name="chart-type">
+                                {%- for i in [CHART_TYPE_BAR, CHART_TYPE_COLUMN,CHART_TYPE_LINE, CHART_TYPE_PIE] %}
+                                    <option{{ ' selected' if i==table['view_settings']['chart_type'] else '' }}
+                                            value="{{ i }}">{{ str_chart_type(i) }}</option>
+                                {%- endfor %}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="save-settings">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-primary btn-sm btn-save" disabled><i
-                            class="fa fa-save"></i> {{ _('Save') }}
-                    </button>
-                </div>
-            </form>
+                    <div class="setting series">
+                        <div class="key">{{ _('Series By') }}</div>
+                        <div class="value">
+                            <select class="form-control form-control-sm input-series" name="series-by">
+                                {%- for i in [SERIES_BY_CATEGORIES, SERIES_BY_OPTIONS] %}
+                                    <option{{ ' selected' if i==table['view_settings']['series_by'] else '' }}
+                                            value="{{ i }}">{{ str_series_opt(i) }}</option>
+                                {%- endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="save-settings">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-primary btn-sm btn-save" disabled><i
+                                class="fa fa-save"></i> {{ _('Save') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="download">
+                <button class="btn btn-primary btn-download" disabled>{{ _('Download PPTX') }}</button>
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="download"></div>
+
     </div>
 {% endblock content %}
 
@@ -61,10 +88,15 @@
 
 {% block js %}
     {{ super() }}
-     <script src="{{ url_for('static', filename='bower_components/highcharts/highcharts.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/highcharts/highcharts.js') }}"></script>
     <script>
-    var crossBreakIndex = {{ table['view_settings']['cross_break'] }};
-    var chartType = {{ table['view_settings']['chart_type'] }};
+        var crossBreakIndex = {{ table['view_settings']['cross_break'] }};
+        var chartType = {{ table['view_settings']['chart_type'] }};
+        var seriesBy = {{ table['view_settings']['series_by'] }};
     </script>
     <script src="{{ s_url_for('js', 'builder.js') }}"></script>
+    <script>
+        var selectedItem = document.getElementById('item-{{ index }}');
+        document.getElementsByClassName('slides')[0].scrollTop = (selectedItem.offsetTop - 200);
+    </script>
 {% endblock js %}

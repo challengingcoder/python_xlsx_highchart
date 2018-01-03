@@ -1,10 +1,19 @@
+var CHART_TYPE_BAR = 1;
+var CHART_TYPE_COLUMN = 2;
+var CHART_TYPE_LINE = 3;
+var CHART_TYPE_PIE = 4;
+
+var SERIES_BY_CATEGORIES = 1;
+var SERIES_BY_OPTIONS = 2;
+
+
 $(function () {
     $('.slide-list li').click(function () {
         var i = $(this).data('index');
         window.location.href = '/builder/' + i;
     });
 
-    $('.input-cross-break, .input-chart-type').change(function () {
+    $('.input-cross-break, .input-chart-type, .input-series').change(function () {
         $('.btn-save').prop('disabled', false);
     });
 });
@@ -12,18 +21,47 @@ $(function () {
 
 $(function () {
     $.getJSON('?json=1', function (resp) {
-        if (chartType === 1) {
-            var chartObj = chartObjBar(resp.question, resp.options, resp.sections[crossBreakIndex].categories);
+
+        var title = resp.question;
+        var categories = resp.options;
+        var series = resp.sections[crossBreakIndex].categories;
+
+        if (seriesBy === SERIES_BY_OPTIONS) {
+
+            var newCategories = [];
+            for (var i = 0; i < series.length; i++) {
+                newCategories.push(series[i]['name']);
+            }
+
+            categories = newCategories;
+            series = resp.data_by_options[crossBreakIndex];
+        }
+
+        var chartObj = null;
+        if (chartType === CHART_TYPE_BAR) {
+            chartObj = chartObjBar(title, categories, series, 'bar');
+        } else if (chartType === CHART_TYPE_COLUMN) {
+            chartObj = chartObjBar(title, categories, series, 'column');
+        } else if (chartType === CHART_TYPE_LINE) {
+            chartObj = chartObjBar(title, categories, series, 'line');
+        } else if (chartType === CHART_TYPE_PIE) {
+
+        }
+
+        if (chartObj !== null) {
             Highcharts.chart('chart-container', chartObj);
         }
+
     });
 });
 
 
-var chartObjBar = function (title, categories, seriesData) {
+var chartObjBar = function (title, categories, seriesData, type) {
+
+
     var chartObj = {
         chart: {
-            type: 'bar'
+            type: type
         },
         title: {
             text: title

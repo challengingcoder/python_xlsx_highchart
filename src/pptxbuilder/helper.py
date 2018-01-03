@@ -12,3 +12,13 @@ def str_chart_type(t):
         }[t]
     except KeyError:
         return None
+
+
+def str_series_opt(t):
+    try:
+        return {
+            SERIES_BY_CATEGORIES: _('Categories'),
+            SERIES_BY_OPTIONS: _('Options')
+        }[t]
+    except KeyError:
+        return None
