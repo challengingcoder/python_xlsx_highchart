@@ -29,7 +29,7 @@
                 <div id="chart-container"></div>
             </div>
             <div class="customization">
-                <form method="post">
+                <form method="post" id="customization-form">
                     <div class="setting cross-break">
                         <div class="key">{{ _('Crossbreak') }}</div>
                         <div class="value">
@@ -65,12 +65,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="save-settings">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn btn-primary btn-sm btn-save" disabled><i
-                                class="fa fa-save"></i> {{ _('Save') }}
-                        </button>
-                    </div>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 </form>
             </div>
             <div class="download">

@@ -1,20 +1,35 @@
 @import "mixin";
 
+$header-height: 65px;
+
 body {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .header {
-  padding-bottom: 1rem;
-  border-bottom: .05rem solid #e5e5e5;
-  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  padding: 8px 10px 0 10px;
 
   h3 {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 3rem;
+
+    a {
+      color: #636c72;
+    }
   }
+
+  ul.nav {
+    margin-top: 5px;
+  }
+
+  height: $header-height;
 }
 
 .footer {
@@ -110,24 +125,6 @@ body {
     display: none;
   }
 
-  .selected-file-area {
-    display: none;
-    text-align: center;
-    background: #eceeef;
-
-    border-radius: 6px;
-    box-sizing: border-box;
-    padding: 10px;
-    width: 400px;
-    margin: auto;
-    .filename {
-      color: #676768;
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-  }
-
   .upload-form {
 
   }
@@ -135,14 +132,14 @@ body {
 
 .wrapper.builder {
 
-  width: 1100px;
+  width: 100%;
+  min-width: 900px;
+  height: 100%;
 
   .builder-area {
+    height: calc(100% - #{$header-height});
+    min-height: 400px;
     clear: both;
-    border-bottom: 1px solid #ccc;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 
     .slides {
       border-right: 1px solid #ccc;
@@ -155,7 +152,7 @@ body {
     }
 
     .chart {
-      height: 640px;
+      height: calc(100% - 60px);
     }
 
     .download {
@@ -174,8 +171,8 @@ body {
     }
 
     .slides, .customization {
-      width: 150px;
-      height: 700px;
+      width: 160px;
+      height: 100%;
     }
 
     .slides, .chart, .download {
@@ -183,7 +180,7 @@ body {
     }
 
     .chart, .download {
-      width: 800px;
+      width: calc(100% - 320px);
     }
 
     .slides {
@@ -196,10 +193,10 @@ body {
       }
 
       ol.slide-list {
-        padding: 0 4px 0 26px;
+        padding: 0 14px 0 26px;
+
         li {
           font-size: 14px;
-
           margin-bottom: 10px;
           padding: 4px;
           cursor: pointer;
@@ -214,7 +211,6 @@ body {
               text-align: center;
               font-size: 13px;
               margin-bottom: 30px;
-
             }
 
             .slide-info {
@@ -261,16 +257,17 @@ body {
 
         }
       }
-
-      .save-settings {
-        text-align: center;
-      }
     }
 
     .chart {
+      background: #fff;
       #chart-container {
-        width: 100%;
-        height: 100%;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        margin: 10px 0 0 10px;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
       }
     }
   }

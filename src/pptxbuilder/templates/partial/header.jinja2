@@ -2,10 +2,6 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills float-right">
-                <li class="nav-item">
-                    <a class="nav-link {{ 'active' if request.endpoint == 'home.index' else '' }}"
-                       href="{{ url_for('home.index') }}">{{ _('Home') }}</a>
-                </li>
                 {% if 'builder_flag' in session %}
                     <li class="nav-item">
                         <a class="nav-link {{ 'active' if request.endpoint.startswith('builder') else '' }}"
@@ -13,6 +9,6 @@
                 {% endif %}
             </ul>
         </nav>
-        <h3 class="text-muted">{{ _('PPTX Builder') }}</h3>
+        <h3 class="text-muted"><a href="{{ url_for('home.index') }}">{{ _('PPTX Builder') }}</a></h3>
     </div>
 {%- endmacro %}

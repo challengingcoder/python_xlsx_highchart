@@ -18,11 +18,7 @@
             <p class="upload-text">{{ _('Drag and drop files here to start') }}</p>
         </div>
         <input type="file" name="the-file" id="the-file" accept=".xlsx,.xls">
-        <div class="selected-file-area">
-            <div class="filename"></div>
-            <button type="button" class="btn btn-primary btn-next">{{ _('Next') }}</button>
-        </div>
-        <form class="upload-form" method="post" action="{{ url_for('builder.create') }}">
+        <form class="upload-form" id="upload-form" method="post" action="{{ url_for('builder.create') }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="file">
         </form>

@@ -1,5 +1,5 @@
 var checkFileExt = function (fileName) {
-    var allowedExtension = ['xls', 'xlsx', 'mtd', 'jpg'];
+    var allowedExtension = ['xls', 'xlsx'];
     var fileSp = fileName.split('.');
     var fileEx = fileSp[fileSp.length - 1].toLowerCase();
     if (allowedExtension.indexOf(fileEx) >= 0) {
@@ -23,15 +23,16 @@ var filterFiles = function (files) {
 var selectedFile = null;
 
 var resetSelectedFile = function () {
-    $('.selected-file-area').hide();
-    $('.selected-file-area .filename').text('');
     selectedFile = null;
 };
 
 var setSelectedFile = function (file) {
-    $('.selected-file-area').show();
-    $('.selected-file-area .filename').text(file.name);
     selectedFile = file;
+    var reader = new FileReader();
+    reader.addEventListener('load', function () {
+        submit(reader.result)
+    });
+    reader.readAsDataURL(selectedFile);
 };
 
 
@@ -67,20 +68,8 @@ $('.upload-area').click(function () {
     $('#the-file').trigger('click');
 });
 
-$('.btn-next').click(function () {
-    if (selectedFile !== null) {
-        var reader = new FileReader();
-
-        reader.addEventListener('load', function () {
-            submit(reader.result)
-        });
-
-        reader.readAsDataURL(selectedFile);
-    }
-});
 
 var submit = function (fileContents) {
-    $('.btn-next').prop('disabled', true);
     $('input[name="file"]').val(fileContents);
     $('.upload-form').submit();
 };

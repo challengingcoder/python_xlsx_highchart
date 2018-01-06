@@ -14,7 +14,7 @@ $(function () {
     });
 
     $('.input-cross-break, .input-chart-type, .input-series').change(function () {
-        $('.btn-save').prop('disabled', false);
+        $('#customization-form').submit();
     });
 });
 
