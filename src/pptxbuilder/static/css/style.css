@@ -93,7 +93,8 @@ body {
     .wrapper.builder .builder-area .slides {
       width: 165px;
       border-right: 1px solid #ccc;
-      overflow: auto; }
+      overflow-x: hidden;
+      overflow-y: auto; }
     .wrapper.builder .builder-area .customization {
       width: 150px;
       border-left: 1px solid #ccc;
