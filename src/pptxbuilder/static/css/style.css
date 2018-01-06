@@ -8,8 +8,8 @@ body {
 .header {
   border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
-  padding: 8px 10px 0 10px;
-  height: 65px; }
+  padding: 15px 10px 0 10px;
+  height: 80px; }
   .header h3 {
     margin-top: 0;
     margin-bottom: 0;
@@ -17,7 +17,7 @@ body {
     .header h3 a {
       color: #636c72; }
   .header ul.nav {
-    margin-top: 5px; }
+    margin-top: 4px; }
 
 .footer {
   padding-top: 1.5rem;
@@ -87,13 +87,15 @@ body {
   min-width: 900px;
   height: 100%; }
   .wrapper.builder .builder-area {
-    height: calc(100% - 65px);
+    height: calc(100% - 80px);
     min-height: 400px;
     clear: both; }
     .wrapper.builder .builder-area .slides {
+      width: 165px;
       border-right: 1px solid #ccc;
       overflow: auto; }
     .wrapper.builder .builder-area .customization {
+      width: 150px;
       border-left: 1px solid #ccc;
       float: right; }
     .wrapper.builder .builder-area .chart {
@@ -109,12 +111,11 @@ body {
       box-sizing: border-box;
       background: #f6f6f6; }
     .wrapper.builder .builder-area .slides, .wrapper.builder .builder-area .customization {
-      width: 160px;
       height: 100%; }
     .wrapper.builder .builder-area .slides, .wrapper.builder .builder-area .chart, .wrapper.builder .builder-area .download {
       float: left; }
     .wrapper.builder .builder-area .chart, .wrapper.builder .builder-area .download {
-      width: calc(100% - 320px); }
+      width: calc(100% - 315px); }
     .wrapper.builder .builder-area .slides .title {
       text-align: center;
       font-size: 14px;
@@ -122,7 +123,9 @@ body {
       color: #666;
       margin: 10px 0; }
     .wrapper.builder .builder-area .slides ol.slide-list {
-      padding: 0 14px 0 26px; }
+      padding: 0 14px 0 26px;
+      width: 160px;
+      overflow: hidden; }
       .wrapper.builder .builder-area .slides ol.slide-list li {
         font-size: 14px;
         margin-bottom: 10px;

@@ -1,6 +1,6 @@
 @import "mixin";
 
-$header-height: 65px;
+$header-height: 80px;
 
 body {
   width: 100%;
@@ -13,7 +13,7 @@ body {
 .header {
   border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
-  padding: 8px 10px 0 10px;
+  padding: 15px 10px 0 10px;
 
   h3 {
     margin-top: 0;
@@ -26,7 +26,7 @@ body {
   }
 
   ul.nav {
-    margin-top: 5px;
+    margin-top: 4px;
   }
 
   height: $header-height;
@@ -142,11 +142,13 @@ body {
     clear: both;
 
     .slides {
+      width: 165px;
       border-right: 1px solid #ccc;
       overflow: auto;
     }
 
     .customization {
+      width: 150px;
       border-left: 1px solid #ccc;
       float: right;
     }
@@ -171,7 +173,6 @@ body {
     }
 
     .slides, .customization {
-      width: 160px;
       height: 100%;
     }
 
@@ -180,7 +181,7 @@ body {
     }
 
     .chart, .download {
-      width: calc(100% - 320px);
+      width: calc(100% - 315px);
     }
 
     .slides {
@@ -194,8 +195,11 @@ body {
 
       ol.slide-list {
         padding: 0 14px 0 26px;
+        width: 160px;
+        overflow: hidden;
 
         li {
+
           font-size: 14px;
           margin-bottom: 10px;
           padding: 4px;
