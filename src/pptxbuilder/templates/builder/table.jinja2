@@ -69,7 +69,7 @@
                 </form>
             </div>
             <div class="download">
-                <button class="btn btn-primary btn-download" disabled>{{ _('Download PPTX') }}</button>
+                <a class="btn btn-primary btn-download" href="{{ url_for('builder.export') }}">{{ _('Download PPTX') }}</a>
             </div>
             <div class="clearfix"></div>
         </div>
