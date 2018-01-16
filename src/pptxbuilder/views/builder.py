@@ -154,7 +154,6 @@ class Export(MethodView):
             chart_type = table['view_settings']['chart_type']
             series_by = table['view_settings']['series_by']
             sub_title_text = _('Crossbreak: {}'.format(section['name']))
-            reverse_colors = (series_by == SERIES_BY_OPTIONS)
 
             # Build pre chart data to render
             pd_list = {}
@@ -170,8 +169,7 @@ class Export(MethodView):
             data_frame = (data_frame / 100).replace(np.NaN, '')
 
             if chart_type == CHART_TYPE_BAR:
-                add_bar_chart(slide, data_frame, reverse_colors=reverse_colors, title_text=question,
-                              sub_title_text=sub_title_text)
+                add_bar_chart(slide, data_frame, title_text=question, sub_title_text=sub_title_text)
             elif chart_type == CHART_TYPE_COLUMN:
                 add_column_chart(slide, data_frame, title_text=question, sub_title_text=sub_title_text)
             elif chart_type == CHART_TYPE_LINE:

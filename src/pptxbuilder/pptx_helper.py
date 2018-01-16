@@ -256,7 +256,7 @@ def add_doughnut_chart(slide, data_frame, title_text=None, sub_title_text=None):
                         if serie.name == 'First':
                             run.font.size = Pt(9)
                             run.font.bold = True
-                            run.font.color.rgb = RGBColor(*(255, 255, 255))
+                            run.font.color.rgb = RGBColor(*(247, 247, 247))
                         else:
                             run.font.size = Pt(8)
 
@@ -274,7 +274,7 @@ def add_doughnut_chart(slide, data_frame, title_text=None, sub_title_text=None):
         s += 1
 
 
-def add_bar_chart(slide, data_frame, title_text=None, sub_title_text=None, reverse_colors=False):
+def add_bar_chart(slide, data_frame, title_text=None, sub_title_text=None):
     excel_num_format = '0.00%'
 
     chart_style = 2
@@ -308,14 +308,16 @@ def add_bar_chart(slide, data_frame, title_text=None, sub_title_text=None, rever
         chart_sub_title(slide, sub_title_text)
 
     # Legend settings
-    chart.has_legend = True
-    legend = chart.legend
+    # Show legend if data column has more than 1 column
+    if len(data_frame.columns) > 1:
+        chart.has_legend = True
+        legend = chart.legend
 
-    legend.include_in_layout = False
-    legend.position = XL_LEGEND_POSITION.BOTTOM
-    legend.font.name = PPT_DEFAULT_FONT
-    legend.font.size = PPT_LEGEND_FONT_SIZE
-    legend.font.color.rgb = RGBColor(*PPT_LEGEND_COLOR)
+        legend.include_in_layout = False
+        legend.position = XL_LEGEND_POSITION.BOTTOM
+        legend.font.name = PPT_DEFAULT_FONT
+        legend.font.size = PPT_LEGEND_FONT_SIZE
+        legend.font.color.rgb = RGBColor(*PPT_LEGEND_COLOR)
 
     # Category axis (vertical) settings
     category_axis = chart.category_axis
@@ -333,10 +335,6 @@ def add_bar_chart(slide, data_frame, title_text=None, sub_title_text=None, rever
     value_axis.visible = True
     value_axis.has_major_gridlines = True
 
-    value_axis.maximum_scale = 1
-    value_axis.minimum_scale = 0
-    value_axis.major_unit = 0.1
-    value_axis.minor_unit = None
     value_axis.major_tick_mark = XL_TICK_MARK.OUTSIDE
     value_axis.minor_tick_mark = XL_TICK_MARK.NONE
     value_axis.tick_label_position = XL_TICK_LABEL_POSITION.LOW
@@ -365,14 +363,14 @@ def add_bar_chart(slide, data_frame, title_text=None, sub_title_text=None, rever
 
     # Apply theme colors to series
     series_colors_list = []
-    if len(data_frame.columns) > 1:
-        series_colors_list = color_palette(len(data_frame.columns), reverse_colors)
+    if len(data_frame.columns) >= 1:
+        series_colors_list = color_palette(len(data_frame.columns))
 
     for i, serie in enumerate(data_frame.columns):
         serie = plot.series[i]
         serie.invert_if_negative = False
 
-        if len(data_frame.columns) > 1:
+        if len(data_frame.columns) >= 1:
             fill = serie.format.fill
             fill.solid()
             color_code = series_colors_list[i]
@@ -405,14 +403,16 @@ def add_column_chart(slide, data_frame, title_text=None, sub_title_text=None):
         chart_sub_title(slide, sub_title_text)
 
     # Legend settings
-    chart.has_legend = True
-    legend = chart.legend
+    # Show legend if data column has more than 1 column
+    if len(data_frame.columns) > 1:
+        chart.has_legend = True
+        legend = chart.legend
 
-    legend.include_in_layout = False
-    legend.position = XL_LEGEND_POSITION.BOTTOM
-    legend.font.name = PPT_DEFAULT_FONT
-    legend.font.size = PPT_LEGEND_FONT_SIZE
-    legend.font.color.rgb = RGBColor(*PPT_LEGEND_COLOR)
+        legend.include_in_layout = False
+        legend.position = XL_LEGEND_POSITION.BOTTOM
+        legend.font.name = PPT_DEFAULT_FONT
+        legend.font.size = PPT_LEGEND_FONT_SIZE
+        legend.font.color.rgb = RGBColor(*PPT_LEGEND_COLOR)
 
     # Category axis (vertical) settings
     category_axis = chart.category_axis
@@ -430,10 +430,6 @@ def add_column_chart(slide, data_frame, title_text=None, sub_title_text=None):
     value_axis.visible = True
     value_axis.has_major_gridlines = True
 
-    value_axis.maximum_scale = 1
-    value_axis.minimum_scale = 0
-    value_axis.major_unit = 0.1
-    value_axis.minor_unit = None
     value_axis.major_tick_mark = XL_TICK_MARK.OUTSIDE
     value_axis.minor_tick_mark = XL_TICK_MARK.NONE
     value_axis.tick_label_position = XL_TICK_LABEL_POSITION.LOW
@@ -461,14 +457,14 @@ def add_column_chart(slide, data_frame, title_text=None, sub_title_text=None):
 
     # Apply theme colors to series
     series_colors_list = []
-    if len(data_frame.columns) > 1:
+    if len(data_frame.columns) >= 1:
         series_colors_list = color_palette(len(data_frame.columns), True)
 
     for i, serie in enumerate(data_frame.columns):
         serie = plot.series[i]
         serie.invert_if_negative = False
 
-        if len(data_frame.columns) > 1:
+        if len(data_frame.columns) >= 1:
             fill = serie.format.fill
             fill.solid()
             color_code = series_colors_list[i]
@@ -552,7 +548,7 @@ def add_line_chart(slide, data_frame, title_text=None, sub_title_text=None):
     # Apply theme colors to series
     # TODO: Line chart does not apply colors
     series_colors_list = []
-    if len(data_frame.columns) > 1:
+    if len(data_frame.columns) >= 1:
         series_colors_list = color_palette(len(data_frame.columns))
 
     for i, serie in enumerate(data_frame.columns):
@@ -560,10 +556,11 @@ def add_line_chart(slide, data_frame, title_text=None, sub_title_text=None):
 
         serie.invert_if_negative = False
 
-        if len(data_frame.columns) > 1:
+        if len(data_frame.columns) >= 1:
             fill = serie.format.fill
             fill.solid()
             color_code = series_colors_list[i]
+            print(color_code)
             fill.fore_color.rgb = RGBColor(*color_code)
 
         # Set marker style
