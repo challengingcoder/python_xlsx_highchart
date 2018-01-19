@@ -37,12 +37,6 @@ def __web_setup():
     def s_url_for(path, file):
         # A helper to serve assets with version numbers.
 
-        # Serve .min. files on production
-        is_dev = app.config['DEVELOPMENT']
-
-        if path in ['css', 'js'] and '.min.' not in path and not is_dev:
-            file = ('.'.join(file.split('.')[:-1] + ['min'] + [file.split('.')[-1]]))
-
         st_file = os.path.join(this_dir, 'static', path, file)
         if os.path.exists(st_file):
             file_last_mod = os.path.getmtime(st_file)
