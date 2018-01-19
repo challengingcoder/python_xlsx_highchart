@@ -25,7 +25,8 @@ body {
   border-top: .05rem solid #e5e5e5; }
 
 .wrapper {
-  width: 900px;
+  width: 100%;
+  min-width: 900px;
   margin: 0 auto; }
 
 .wrapper.home .explainer {
@@ -83,30 +84,28 @@ body {
   display: none; }
 
 .wrapper.builder {
-  width: 100%;
-  min-width: 900px;
   height: 100%; }
   .wrapper.builder .builder-area {
     height: calc(100% - 80px);
     min-height: 400px;
     clear: both; }
     .wrapper.builder .builder-area .slides {
-      width: 165px;
+      width: 185px;
       border-right: 1px solid #ccc;
       overflow-x: hidden;
       overflow-y: auto; }
     .wrapper.builder .builder-area .customization {
-      width: 150px;
+      width: 170px;
       border-left: 1px solid #ccc;
       float: right; }
     .wrapper.builder .builder-area .chart {
-      height: calc(100% - 60px); }
+      height: calc(100% - 100px); }
     .wrapper.builder .builder-area .download {
-      height: 60px;
+      height: 100px;
       border-top: 1px solid #ccc;
       text-align: center; }
       .wrapper.builder .builder-area .download .btn-download {
-        margin-top: 10px; }
+        margin-top: 30px; }
     .wrapper.builder .builder-area .slides, .wrapper.builder .builder-area .customization, .wrapper.builder .builder-area .chart, .wrapper.builder .builder-area .download {
       position: relative;
       box-sizing: border-box;
@@ -116,7 +115,7 @@ body {
     .wrapper.builder .builder-area .slides, .wrapper.builder .builder-area .chart, .wrapper.builder .builder-area .download {
       float: left; }
     .wrapper.builder .builder-area .chart, .wrapper.builder .builder-area .download {
-      width: calc(100% - 315px); }
+      width: calc(100% - 355px); }
     .wrapper.builder .builder-area .slides .title {
       text-align: center;
       font-size: 14px;
@@ -124,8 +123,8 @@ body {
       color: #666;
       margin: 10px 0; }
     .wrapper.builder .builder-area .slides ol.slide-list {
-      padding: 0 14px 0 26px;
-      width: 160px;
+      padding: 0 14px 0 36px;
+      width: 168px;
       overflow: hidden; }
       .wrapper.builder .builder-area .slides ol.slide-list li {
         font-size: 14px;

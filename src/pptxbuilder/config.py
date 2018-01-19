@@ -5,7 +5,12 @@ import ast
 config = config_parser.ConfigParser()
 config.optionxform = str
 
-config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'config.ini')
+config_file = 'config.development.ini'
+
+if os.environ.get('PYTHONPRODUCTION', None) is not None:
+    config_file = 'config.production.ini'
+
+config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', config_file)
 
 if not os.path.isfile(config_file_path):
     raise EnvironmentError('Config file config.ini not exists!')
