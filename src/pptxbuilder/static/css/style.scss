@@ -141,28 +141,28 @@ body {
     clear: both;
 
     .slides {
-      width: 185px;
+      width: 165px;
       border-right: 1px solid #ccc;
       overflow-x: hidden;
       overflow-y: auto;
     }
 
     .customization {
-      width: 170px;
+      width: 150px;
       border-left: 1px solid #ccc;
       float: right;
     }
 
     .chart {
-      height: calc(100% - 100px);
+      height: calc(100% - 60px);
     }
 
     .download {
-      height: 100px;
+      height: 60px;
       border-top: 1px solid #ccc;
       text-align: center;
       .btn-download {
-        margin-top: 30px;
+        margin-top: 10px;
       }
     }
 
@@ -181,7 +181,7 @@ body {
     }
 
     .chart, .download {
-      width: calc(100% - 355px);
+      width: calc(100% - 315px);
     }
 
     .slides {
@@ -194,8 +194,8 @@ body {
       }
 
       ol.slide-list {
-        padding: 0 14px 0 36px;
-        width: 168px;
+        padding: 0 14px 0 26px;
+        width: 158px;
         overflow: hidden;
 
         li {
@@ -266,9 +266,9 @@ body {
     .chart {
       background: #fff;
       #chart-container {
-        width: calc(100% - 20px);
-        height: calc(100% - 20px);
-        margin: 10px 0 0 10px;
+        width: calc(100% - 50px);
+        height: calc(100% - 50px);
+        margin: 25px 0 0 25px;
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
