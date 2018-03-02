@@ -1,14 +1,39 @@
 {%- macro render() -%}
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills float-right">
-                {% if 'builder_flag' in session %}
-                    <li class="nav-item">
-                        <a class="nav-link {{ 'active' if request.endpoint.startswith('builder') else '' }}"
-                           href="{{ url_for('builder.index') }}">{{ _('Builder') }}</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-        <h3 class="text-muted"><a href="{{ url_for('home.index') }}">{{ _('PPTX Builder') }}</a></h3>
+
+<div class="container pt-4">
+  <nav class="navbar navbar-light navbar-expand-sm text-uppercase app-navbar mb-5">
+    <a class="navbar-brand navbar-logo mr-auto" href="../">
+      <span class="builder-logo">
+      <img class="header-logo" src="../static/img/logo.svg">
+      PPTX builder
+      </span>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarResponsive"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="../">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../about">About Us</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="../bug-report">Bug report</a>
+        </li>
+      </ul>
     </div>
+</nav>
+</div>
+
+
 {%- endmacro %}

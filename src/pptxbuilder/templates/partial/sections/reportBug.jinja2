@@ -1,0 +1,41 @@
+{%- macro render() -%}
+
+<img class="about-image" src="../../static/img/reportImage.jpg">
+
+    <div class="block app-block-intro">
+      <div class="container text-xs-center">
+        <h1 class="block-title mb-0 text-uppercase app-myphone-brand smaller-head-title">Report bugs to us</h1>
+        <p class="lead mb-5 pb-5">We would love to hear from you! <br> If you find something strange, or have any problems using our platform, please let us know!</p>
+      </div>
+    </div>
+
+    <div class="wrapper home block block-bordered-lg gray-background no-border form-section">
+      <div class="container text-xs-center">
+
+
+        <form class="c-form flex-property" action="send_email.php" method="post">
+          <div class="input-field">
+            <p class="input-name featured-list-icon-text mb-0"><strong>Name</strong></p>
+            <input type="text" tabindex="1" required>
+          </div>
+
+          <div class="input-field">
+            <p class="input-name featured-list-icon-text mb-0"><strong>Email address</strong></p>
+            <input type="email" tabindex="2" required>
+          </div>
+
+          <div class="input-field">
+            <p class="input-name featured-list-icon-text mb-0"><strong>Description</strong></p>
+            <textarea row='10' cols='10' type="text" tabindex="3" required></textarea>
+          </div>
+          <input type="submit" class="submit btn btn-primary mb-3 ml-sm-1">
+        </form>
+
+        <small class="text-muted">
+          We will get back to you as soon as we can!
+        </small>
+
+      </div>
+    </div>
+
+{%- endmacro %}

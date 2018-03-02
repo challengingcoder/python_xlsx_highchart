@@ -1,28 +1,29 @@
 {% extends 'layout/base.jinja2' %}
 {% import 'partial/header.jinja2' as header %}
+{% import 'partial/footer.jinja2' as footer %}
+
+{% import 'partial/sections/firstTopSection.jinja2' as firstSection %}
+{% import 'partial/sections/howItWorksSection.jinja2' as howItWorksSection %}
+{% import 'partial/sections/uploadSection.jinja2' as uploadSection %}
+{% import 'partial/sections/whyUseSection.jinja2' as whyUseSection %}
+{% import 'partial/sections/dataSchemeSection.jinja2' as dataSchemeSection %}
+{% import 'partial/sections/forWho.jinja2' as forWho %}
+{% import 'partial/sections/joinSection.jinja2' as joinSection %}
 
 {% block content %}
-    <div class="wrapper home">
-        {{ header.render() }}
-        <div class="explainer">
-            <div class="item"><span>{{ _('Upload your datafile <br> Xlsx, xls') }}</span></div>
-            <div class="item after"><span>&gt;</span></div>
-            <div class="item"><span>{{ _('Customise your slides') }}</span></div>
-            <div class="item after"><span>&gt;</span></div>
-            <div class="item"><span>{{ _('Download your PPTX') }}</span></div>
-        </div>
-        <div class="upload-area">
-            <div class="upload-icon">
-                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            </div>
-            <p class="upload-text">{{ _('Drag and drop files here to start') }}</p>
-        </div>
-        <input type="file" name="the-file" id="the-file" accept=".xlsx,.xls">
-        <form class="upload-form" id="upload-form" method="post" action="{{ url_for('builder.create') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="file">
-        </form>
-    </div>
+
+    {{ header.render() }}
+
+    {{ firstSection.render() }}
+    {{ howItWorksSection.render() }}
+    {{ uploadSection.render() }}
+    {{ whyUseSection.render() }}
+    {{ dataSchemeSection.render() }}
+    {{ forWho.render() }}
+    {{ joinSection.render() }}
+    {{ footer.render() }}
+
+
 {% endblock content %}
 
 {% block css %}
