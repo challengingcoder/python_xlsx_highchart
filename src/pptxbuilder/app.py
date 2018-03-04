@@ -51,8 +51,17 @@ def __web_setup():
 
 def __run_server():
     # Run development server
+    email = os.environ.get('BUG_EMAIL')
+    password = os.environ.get('BUG_EMAIL_PASSWORD')
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = email
+    app.config['MAIL_PASSWORD'] = password
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
+    app.config['MAIL_DEBUG'] = True
     app.run(host='0.0.0.0', port=5000, threaded=True)
 
 

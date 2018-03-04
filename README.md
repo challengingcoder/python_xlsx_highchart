@@ -2,7 +2,7 @@
 
 ## PROJECT STRUCTURE
 
-This project developed with Python + Flask for backend and Bootstrap + jQuery for frontend. 
+This project developed with Python + Flask for backend and Bootstrap + jQuery for frontend.
 You can see additional python packages in requirement.txt and additional frontend packages in bower.json.
 
 
@@ -36,7 +36,7 @@ Install python requirements from requirements.txt `pip install -r requirements.t
 Install bower requirements `bower install` See how to install bower: https://bower.io
 
 ####Starting development server
-Run `python run.py app` to start application on localhost. 
+Run `python run.py app` to start application on localhost.
 
 
 ###Testing
@@ -68,3 +68,5 @@ Every time when you commit your code to heroku (git push heroku master), it will
 There are 2 configuration files at root path of project. config.development.ini and config.production.ini.
 These files contains basic application configuration. You can change these settings depending on your needs.
 Or you can store new settings for future developments to these files. (such as database url etc.)
+There is a Gmail account associated with report bug page (the one used for sending the emails). It needs to be defined through env variables:
+BUG_EMAIL and BUG_EMAIL_PASSWORD.

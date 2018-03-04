@@ -74,7 +74,7 @@ var submit = function (fileContents) {
     $('.upload-form').submit();
 };
 
-$('#upload-dummy').on('click', function(e){
+$('.upload-dummy').on('click', function(e){
   e.stopPropagation();
   var blob = null;
   var xhr = new XMLHttpRequest();
