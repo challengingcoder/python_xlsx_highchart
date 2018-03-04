@@ -1,6 +1,8 @@
 from flask import Flask, Blueprint, render_template, request
 from flask.views import MethodView
 from flask_mail import Mail, Message
+import os
+
 
 import flask
 
@@ -18,12 +20,16 @@ class BugReport(MethodView):
         return render_template('bugreport/index.jinja2')
     def post(self):
         print('nejra1235')
-
+        if os.environ.get('BUG_SEND_TO_EMAIL', None) is None:
+            bug_send_to_email = 'pptxbuilder@gmail.com'
+        else:
+            bug_send_to_email = os.environ.get('BUG_SEND_TO_EMAIL')
+        bug_email = os.environ.get('BUG_EMAIL')
         contact_name = request.form.get('contactName')
         contact_email = request.form.get('contactEmail')
         contact_message = request.form.get('contactMsg')
         mail = Mail(flask.current_app)
-        msg = Message('Hello', sender = 'pptxbugs@gmail.com', recipients = ['pptxbuilder@gmail.com'])
+        msg = Message('Hello', sender = bug_email, recipients = [bug_send_to_email])
         msg.body = "From:"+contact_email+"\nName:"+contact_name+"\n"+contact_message
         mail.send(msg)
         #send email

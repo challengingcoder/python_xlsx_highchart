@@ -70,3 +70,4 @@ These files contains basic application configuration. You can change these setti
 Or you can store new settings for future developments to these files. (such as database url etc.)
 There is a Gmail account associated with report bug page (the one used for sending the emails). It needs to be defined through env variables:
 BUG_EMAIL and BUG_EMAIL_PASSWORD.
+The email to which these reports will be sent can also be changed through environment variable BUG_SEND_TO_EMAIL. If it is not defined it defaults to pptxbuilder@gmail.com.
