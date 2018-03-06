@@ -32,7 +32,7 @@ class BugReport(MethodView):
         contact_message = request.form.get('contactMsg')
 
         sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-        from_email = Email(bug_email)
+        from_email = Email(contact_email)
         subject = "Bug report"
         to_email = Email(bug_send_to_email)
         content = Content("text/plain", contact_message)
