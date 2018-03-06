@@ -34,7 +34,7 @@ class BugReport(MethodView):
         from_email = Email(contact_email)
         subject = "Bug report"
         to_email = Email(bug_send_to_email)
-        content = Content("text/plain", "Name: " + contact_name + "\r\n" + contact_message)
+        content = Content("text/html", "Name: " + contact_name + "<br>" + contact_message)
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
