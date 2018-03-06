@@ -1,7 +1,9 @@
 from flask import Flask, Blueprint, render_template, request
 from flask.views import MethodView
 from flask_mail import Mail, Message
+import sendgrid
 import os
+from sendgrid.helpers.mail import *
 
 
 import flask
@@ -19,7 +21,7 @@ class BugReport(MethodView):
     def get(self):
         return render_template('bugreport/index.jinja2')
     def post(self):
-        print('nejra1235')
+
         if os.environ.get('BUG_SEND_TO_EMAIL', None) is None:
             bug_send_to_email = 'pptxbuilder@gmail.com'
         else:
@@ -28,10 +30,18 @@ class BugReport(MethodView):
         contact_name = request.form.get('contactName')
         contact_email = request.form.get('contactEmail')
         contact_message = request.form.get('contactMsg')
-        mail = Mail(flask.current_app)
-        msg = Message('Hello', sender = bug_email, recipients = [bug_send_to_email])
-        msg.body = "From:"+contact_email+"\nName:"+contact_name+"\n"+contact_message
-        mail.send(msg)
+
+        sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+        from_email = Email("test@bugreport")
+        subject = "Hello World from the SendGrid Python Library!"
+        to_email = Email(bug_send_to_email)
+        content = Content("text/plain", contact_message)
+        mail = Mail(from_email, subject, to_email, content)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+
         #send email
         return render_template('bugreport/index.jinja2')
 
