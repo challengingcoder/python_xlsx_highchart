@@ -26,7 +26,6 @@ class BugReport(MethodView):
             bug_send_to_email = 'pptxbuilder@gmail.com'
         else:
             bug_send_to_email = os.environ.get('BUG_SEND_TO_EMAIL')
-        bug_email = os.environ.get('BUG_EMAIL')
         contact_name = request.form.get('contactName')
         contact_email = request.form.get('contactEmail')
         contact_message = request.form.get('contactMsg')
@@ -35,7 +34,7 @@ class BugReport(MethodView):
         from_email = Email(contact_email)
         subject = "Bug report"
         to_email = Email(bug_send_to_email)
-        content = Content("text/plain", contact_message)
+        content = Content("text/plain", "Name: " + contact_name + "\n" + contact_message)
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
