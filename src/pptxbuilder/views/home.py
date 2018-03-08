@@ -18,7 +18,7 @@ class About(MethodView):
 
 class BugReport(MethodView):
     def get(self):
-        return render_template('bugreport/index.jinja2')
+        return render_template('bugreport/index.jinja2', mailSent=False)
     def post(self):
 
         if os.environ.get('BUG_SEND_TO_EMAIL', None) is None:
