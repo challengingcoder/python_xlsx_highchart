@@ -43,36 +43,6 @@ class BugReport(MethodView):
         #send email
         return render_template('bugreport/index.jinja2', mailSent=True)
 
-        # mail = Mail(flask.current_app)
-        # msg = Message("Hello",
-        #           sender="from@example.com",
-        #           recipients=["sibrahimpa1@gmail.com"])
-        # msg.body = "nejra"
-        # mail.send(msg)
-        # sender = 'from@fromdomain.com'
-        # receivers = ['sibrahimpa1@gmail.com']
-        #
-        # message = """From: From Person <from@fromdomain.com>
-        # To: To Person <to@todomain.com>
-        # Subject: SMTP e-mail test
-        #
-        # This is a test e-mail message.
-        # """
-        #
-        # # try:
-        # server = smtplib.SMTP('smtp.gmail.com', 25)
-        # server.connect("smtp.gmail.com",465)
-        # server.ehlo()
-        # server.starttls()
-        # server.ehlo()
-        #
-        # text = msg.as_string()
-        # server.sendmail("npasic00@gmail.com", receivers[0], "text")
-        # server.quit()
-        # print("Successfully sent email")
-        # except SMTPException:
-        #    print("Error: unable to send email")
-
 
 home_bp.add_url_rule('/', view_func=HomeIndex.as_view('index'))
 home_bp.add_url_rule('/about', view_func=About.as_view('about'))
