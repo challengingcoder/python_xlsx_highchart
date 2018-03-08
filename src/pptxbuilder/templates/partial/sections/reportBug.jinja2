@@ -12,9 +12,9 @@
     <div class="wrapper home block block-bordered-lg gray-background no-border form-section">
       <div class="container text-xs-center">
 
-      {% if mailSent %}
+      {%- if mailSent %}
         <div>Thank you for your feedback!</div>
-      {% else %}
+      {%- else %}
         <form class="c-form flex-property" action="/bug-report" method="post">
           <div class="input-field">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -34,7 +34,7 @@
           </div>
           <input type="submit" class="submit btn btn-primary mb-3 ml-sm-1">
         </form>
-      {% endif %}
+      {%- endif %}
 
 
         <small class="text-muted">
