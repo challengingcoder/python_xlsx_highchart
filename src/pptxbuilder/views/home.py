@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint, render_template, request
 from flask.views import MethodView
-from flask_mail import Mail, Message
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
@@ -42,7 +41,7 @@ class BugReport(MethodView):
         print(response.headers)
 
         #send email
-        return render_template('bugreport/index.jinja2')
+        return render_template('bugreport/index.jinja2', mailSent=True)
 
         # mail = Mail(flask.current_app)
         # msg = Message("Hello",

@@ -1,8 +1,6 @@
 blinker==1.4
 click==6.7
 Flask==0.12.2
-Flask-Mail==0.9.1
-Flask-Sendmail==0.1
 Flask-Session==0.3.1
 Flask-WTF==0.14.2
 gunicorn==19.7.1

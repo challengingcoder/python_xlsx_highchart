@@ -12,26 +12,30 @@
     <div class="wrapper home block block-bordered-lg gray-background no-border form-section">
       <div class="container text-xs-center">
 
+      {% if mailSent %}
+        <div>Thank you for your feedback!</div>
+      {% else %}
+      <form class="c-form flex-property" action="/bug-report" method="post">
+        <div class="input-field">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-        <form class="c-form flex-property" action="/bug-report" method="post">
-          <div class="input-field">
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <p class="input-name featured-list-icon-text mb-0"><strong>Name</strong></p>
+          <input autocomplete="name" name="contactName" type="text" tabindex="1" required>
+        </div>
 
-            <p class="input-name featured-list-icon-text mb-0"><strong>Name</strong></p>
-            <input autocomplete="name" name="contactName" type="text" tabindex="1" required>
-          </div>
+        <div class="input-field">
+          <p class="input-name featured-list-icon-text mb-0"><strong>Email address</strong></p>
+          <input autocomplete="email" name="contactEmail" type="email" tabindex="2" required>
+        </div>
 
-          <div class="input-field">
-            <p class="input-name featured-list-icon-text mb-0"><strong>Email address</strong></p>
-            <input autocomplete="email" name="contactEmail" type="email" tabindex="2" required>
-          </div>
+        <div class="input-field">
+          <p class="input-name featured-list-icon-text mb-0"><strong>Description</strong></p>
+          <textarea autocomplete="on" name="contactMsg" row='10' cols='10' type="text" tabindex="3" required></textarea>
+        </div>
+        <input type="submit" class="submit btn btn-primary mb-3 ml-sm-1">
+      </form>
+      {% endif %}}
 
-          <div class="input-field">
-            <p class="input-name featured-list-icon-text mb-0"><strong>Description</strong></p>
-            <textarea autocomplete="on" name="contactMsg" row='10' cols='10' type="text" tabindex="3" required></textarea>
-          </div>
-          <input type="submit" class="submit btn btn-primary mb-3 ml-sm-1">
-        </form>
 
         <small class="text-muted">
           We will get back to you as soon as we can!
