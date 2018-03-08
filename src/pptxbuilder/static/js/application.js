@@ -16,6 +16,29 @@ $(function () {
   // doc nav js
   var $toc = $('#markdown-toc')
   var $window = $(window)
+  $('.upload-dummy').on('click', function(e){
+    e.stopPropagation();
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    var loc = window.location.pathname;
+    console.log(loc);
+    xhr.open("GET", "static/pptx_builder_dummy_datafile.xlsx", {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64"});
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = function()
+    {
+      blob = xhr.response;//xhr.response is now a blob object
+      console.log(blob);
+
+      selectedFile = blob;
+      var reader = new FileReader();
+      reader.addEventListener('load', function () {
+        $('input[name="file"]').val(reader.result);
+        $('.upload-form').submit();
+      });
+      reader.readAsDataURL(selectedFile);
+    }
+    xhr.send();
+  })
 
   if ($toc[0]) {
     $('#markdown-toc li').addClass('nav-item')

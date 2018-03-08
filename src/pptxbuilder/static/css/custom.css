@@ -189,6 +189,15 @@ a:hover{
 .wrapper{
   min-width: 0px !important;
 }
+.wrapper.builder .builder-area{
+  border-top: 1px solid #cccccc;
+}
+.wrapper.builder .container.pt-4{
+  padding-top: 10px !important;
+}
+.wrapper.builder .navbar{
+  margin-bottom: 5px !important;
+}
 .thank-you-title{
   margin-bottom: 0px !important;
   color: #0373d8;
