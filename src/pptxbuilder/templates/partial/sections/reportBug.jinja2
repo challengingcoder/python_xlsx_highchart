@@ -1,11 +1,12 @@
-{%- macro render() -%}
+{% import 'partial/sections/joinSection.jinja2' as joinSection %}
 
-<img class="about-image" src="../../static/img/reportImage.jpg">
+{%- macro render() -%}
+<img class="about-image" src="../../static/img/contactImg.jpg">
 
     <div class="block app-block-intro">
       <div class="container text-xs-center">
-        <h1 class="block-title mb-0 text-uppercase app-myphone-brand smaller-head-title">Report bugs to us</h1>
-        <p class="lead mb-5 pb-5">We would love to hear from you! <br> If you find something strange, or have any problems using our platform, please let us know!</p>
+        <h1 class="block-title mb-0 text-uppercase app-myphone-brand smaller-head-title">GET IN TOUCH</h1>
+        <p class="lead mb-5 pb-5">Contact us if you would like to know more about any of our products and services, or if you’re having problems. <br> Please fill out the form below and we’ll promptly be in touch.</p>
       </div>
     </div>
 
@@ -15,7 +16,7 @@
       {%- if mailSent %}
         <div class="lead mb-5 pb-5 thank-you-title">Thank you for your feedback!</div>
       {%- else %}
-        <form class="c-form flex-property" action="/bug-report" method="post">
+        <form class="c-form flex-property" action="/get-in-touch" method="post">
           <div class="input-field">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
@@ -43,5 +44,7 @@
 
       </div>
     </div>
+
+    {{ joinSection.render() }}
 
 {%- endmacro %}

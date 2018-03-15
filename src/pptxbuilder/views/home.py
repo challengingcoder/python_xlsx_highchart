@@ -46,4 +46,4 @@ class BugReport(MethodView):
 
 home_bp.add_url_rule('/', view_func=HomeIndex.as_view('index'))
 home_bp.add_url_rule('/about', view_func=About.as_view('about'))
-home_bp.add_url_rule('/bug-report', view_func=BugReport.as_view('bugReport'))
+home_bp.add_url_rule('/get-in-touch', view_func=BugReport.as_view('bugReport'))

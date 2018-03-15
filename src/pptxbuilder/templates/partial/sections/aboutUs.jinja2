@@ -1,7 +1,9 @@
+{% import 'partial/sections/joinSection.jinja2' as joinSection %}
+
 {%- macro render() -%}
 
     <img class="about-image" src="../../static/img/aboutImg.jpg">
-    <div class="block app-block-intro">
+    <div class="block app-block-intro gray-background">
       <div class="container text-xs-center">
         <h1 class="block-title mb-0 text-uppercase app-myphone-brand smaller-head-title">About Us</h1>
         <p class="lead mb-5 pb-5"> Our mission is to bring PPTX creation to the 21st century.</p>
@@ -14,5 +16,6 @@
       </div>
     </div>
 
+    {{ joinSection.render() }}
 
 {%- endmacro %}

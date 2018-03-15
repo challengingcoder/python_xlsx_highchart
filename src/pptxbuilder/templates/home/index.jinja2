@@ -8,6 +8,7 @@
 {% import 'partial/sections/whyUseSection.jinja2' as whyUseSection %}
 {% import 'partial/sections/dataSchemeSection.jinja2' as dataSchemeSection %}
 {% import 'partial/sections/forWho.jinja2' as forWho %}
+{% import 'partial/sections/haveOwnStructure.jinja2' as haveOwnStructure %}
 {% import 'partial/sections/joinSection.jinja2' as joinSection %}
 
 {% block content %}
@@ -20,6 +21,7 @@
     {{ uploadSection.render() }}
     {{ whyUseSection.render() }}
     {{ dataSchemeSection.render() }}
+    {{ haveOwnStructure.render() }}
     {{ forWho.render() }}
     {{ joinSection.render() }}
     {{ footer.render() }}

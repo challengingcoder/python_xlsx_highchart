@@ -5,6 +5,11 @@
   width: 40px;
   margin-right: 5px;
 }
+.fixed-nav{position:  fixed;width:  100%;margin:  0px;height:  100px;z-index: 2000;max-width:  100%;background-color: white;right:  0;left:  0;top: 0;}
+.fixed-nav .navbar{
+  max-width: 1120px;
+  margin:  auto;
+}
 .navbar-logo span{
   font-weight: 400;
   color: #586169;
@@ -13,10 +18,14 @@
   height: 400px;
   width: 100%;
   object-fit: cover;
-  margin-top: -25px;
+  margin-top: 100px;
 }
 .app-block-intro{
   padding-bottom: 0px !important;
+  margin-top: 0px;
+}
+.wrapper.builder{
+  height: calc(100% - 80px);
 }
 .footer-links{
   color: rgba(116, 119, 123, .5);
@@ -84,11 +93,14 @@ a:hover{
 }
 .how-works-box{
   flex-direction: column;
-  flex: 1;
+  flex: auto;
   justify-content: space-around;
   align-items: flex-start;
   text-align: left;
   padding: 0px 50px;
+  width: 50%;
+  max-width: 50%;
+  margin: 20px 0px;
 }
 .how-works-box .title{
   color: #0374d8 !important;
@@ -156,6 +168,9 @@ a:hover{
 .input-field p{
 
 }
+.homepage-intro{
+  margin-top: 120px !important;
+}
 .input-field input{
   width: 100%;
   outline: none !important;
@@ -177,6 +192,10 @@ a:hover{
   font-weight: 300;
   letter-spacing: -0.02em;
 }
+.explainer{
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 .input-field .submit{
   width: 100%;
   display: block;
@@ -191,9 +210,12 @@ a:hover{
 }
 .wrapper.builder .builder-area{
   border-top: 1px solid #cccccc;
+  margin-top: 80px;
+  height: 100%;
 }
 .wrapper.builder .container.pt-4{
   padding-top: 10px !important;
+  height:  80px !important;
 }
 .wrapper.builder .navbar{
   margin-bottom: 5px !important;
@@ -249,12 +271,24 @@ a:hover{
   }
   .how-works-box{
     margin: 20px 0;
+    width:  100%;
+    max-width:  100%;
+    margin-bottom:  0px;
   }
   .form-section{
     padding: 60px 0px;
   }
   .form-section .c-form{
     padding: 30px !important;
+  }
+}
+@media only screen and (max-width: 576px){
+  .fixed-nav .navbar{
+    padding: 0px;
+    margin: 0px;
+  }
+  .collapse, .collapse ul, .collapse ul li, .collapse ul li a {
+    background-color: white !important;
   }
 }
 @media only screen and (max-width: 480px){
