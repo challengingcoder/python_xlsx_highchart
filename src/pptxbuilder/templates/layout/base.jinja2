@@ -8,6 +8,16 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116160904-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116160904-1');
+    </script>
+
     <title>{% block title %}{{ _('PPTX Builder') }}{% endblock title %}</title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{ s_url_for('favicon', 'apple-icon-57x57.png') }}">
