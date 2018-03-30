@@ -3,15 +3,14 @@
 <div id="upload-section" class="wrapper home block block-bordered-lg">
 <div class="container text-xs-center">
   <h2 class="main-title lead mx-auto">Try it <strong>yourself</strong></h2>
-  <p class="main-title lead mx-auto">Getting started is easy! Upload your Excel spreadsheet (SPSS, IBM Dimensions and Askia compatibility coming soon) using our data structure, see our
-  <a href="/#data-scheme">data structure guidelines</a> below.
-  <br> Or jump right in by using our <a id="upload-dummy" class="upload-dummy" href="javascript:void(0)">sample data to explore the application </a>yourself.</p>
+  <p class="main-title lead mx-auto">Jump right in and explore <a id="upload-dummy" class="upload-dummy" href="javascript:void(0)">PPTX Builder with our sample data</a>. 
+  <br> Or upload your own data using our <a href="/#data-scheme">data structure guidelines</a> below. 
+
   <div class="upload-area">
       <div class="upload-icon">
           <i class="fa fa-cloud-upload" aria-hidden="true"></i>
       </div>
-      <p class="upload-text">{{ _('Drag and drop files here or use our <a id="upload-dummy" class="upload-dummy" href="javascript:void(0)">sample data</a> to explore the application yourself
-') }}</p>
+      <p class="upload-text">{{ _('Drag and drop files here') }}</p>
   </div>
   <input type="file" name="the-file" id="the-file" accept=".xlsx,.xls">
   <form class="upload-form" id="upload-form" method="post" action="{{ url_for('builder.create') }}">
