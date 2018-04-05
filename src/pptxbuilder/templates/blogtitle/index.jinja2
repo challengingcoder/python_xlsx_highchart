@@ -1,0 +1,27 @@
+{% extends 'layout/base.jinja2' %}
+{% import 'partial/header.jinja2' as header %}
+{% import 'partial/footer.jinja2' as footer %}
+
+{% import 'partial/sections/aboutUs.jinja2' as aboutUs %}
+
+{% block content %}
+
+    {{ header.render() }}
+
+    {{ aboutUs.render() }}
+
+
+    dasdhads adsjkaslkdjaslkdjalskjdlk j
+
+    {{ footer.render() }}
+
+{% endblock content %}
+
+{% block css %}
+    {{ super() }}
+{% endblock css %}
+
+{% block js %}
+    {{ super() }}
+    <script src="{{ s_url_for('js', 'home.js') }}"></script>
+{% endblock js %}
