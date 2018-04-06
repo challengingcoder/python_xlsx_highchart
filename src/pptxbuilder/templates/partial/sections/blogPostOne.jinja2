@@ -1,0 +1,291 @@
+{%- macro render() -%}
+
+<style>
+/*********** custom *************/
+
+.container {
+	max-width: 1020px;
+	margin: 0 auto;
+}
+.cusSecpublic {
+	width: 100%;
+	float: left;
+}
+
+.cusSecpublicmain {
+	width:100%;
+	float:left;
+	padding:0 10px;
+
+}
+.cusSecpublic h2 {
+	width:100%;
+	float:left;
+	font-size:30px;
+	color:#000;
+}
+.cusSecpublicmain > p {
+	  font-size: 21px;
+	  font-weight:300;
+	  letter-spacing:-0.02em;
+}
+.cusSecpublicmain p b {
+	font-weight:bold;
+}
+.cuspublicrow {
+	width:100%;
+	float:left;
+	margin:20px 0 0 0;
+}
+.cuspublicrowBox {
+	width:25%;
+	float:left;
+	margin:0 0 30px 0;
+}
+.cuspublicrowBox {
+	width:25%;
+	float:left;
+	padding:0 10px;
+}
+.cuspublicrowBoxImg {
+	width:100%;
+	float:left;
+	min-height:250px;
+	background-size:cover !important;
+	background-repeat:no-repeat !important;
+	background-position:center !important;
+}
+.cuspublicrowBox h4 {
+	width:100%;
+	float:left;
+	font-size: 24px;
+	font-weight:100;
+}
+.cuspublicrowBox p {
+	width:100%;
+	float:left;
+	font-size: 16px;
+}
+.cuspublicrowBoxcnt {
+	width:100%;
+	float:left;
+}
+.cuspublicrowBoxcnt h4 {
+	margin:10px 0 10px 0;
+}
+.cuspublicrowBoxcnt h4 a , .cuspublicrowBoxcnt p a , .cususeIt {
+	color:#000;
+
+}
+.cuspublicrowBoxcnt h4 a:hover , .cuspublicrowBoxcnt p a:hover , .cususeIt:hover {
+	text-decoration:none !important;
+	color:#000 !important;
+}
+.custdetails {
+	width:100%;
+}
+.custdetails .cuspublicrowBoxImg {
+	min-height:600px;
+
+}
+.cuspublicrowBoxcnt p {
+	font-size:16px;
+	line-height:24px;
+}
+.custpostdate {
+	font-size:15px;
+	margin:5px 0 0 0;
+}
+.custpostdate img {
+	width:15px;
+	display:inline-block;
+	vertical-align:top;
+	margin:0 5px 0 0;
+}
+
+.custdetails {
+	width:100%;
+}
+.custdetailsimg {
+	width:100%;
+	float:left;
+	margin:0 0 10px 0;
+}
+/*.custdetailsimg img {
+	width:100%;
+	float:left;
+}*/
+
+
+
+@media only screen and (min-width :100px) and (max-width : 450px) {
+	.cusSecpublic h2 {
+		font-size:24px;
+	}
+	.cusSecpublic p {
+		font-size:16px;
+	}
+	.cuspublicrowBox {
+		width:100%;
+		padding:0;
+		margin: 0 0 30px 0;
+	}
+	.cuspublicrowBox h4 {
+		font-size:20px;
+	}
+}
+@media only screen and (min-width : 451px) and (max-width : 600px) {
+	.cusSecpublic h2 {
+		font-size:24px;
+	}
+	.cusSecpublic p {
+		font-size:16px;
+	}
+	.cuspublicrowBoxImg {
+		min-height:330px;
+	}
+	.cuspublicrowBox {
+		width:100%;
+		padding:0;
+		margin: 0 0 30px 0;
+	}
+	.cuspublicrowBox h4 {
+		font-size:20px;
+	}
+}
+@media only screen and (min-width : 601px) and (max-width : 750px) {
+	.cusSecpublic h2 {
+		font-size:24px;
+	}
+	.cusSecpublic p {
+		font-size:16px;
+	}
+	.cuspublicrowBoxImg {
+		width:60%;
+	}
+	.cuspublicrowBoxImg {
+		min-height:330px;
+	}
+	.cuspublicrowBox {
+		width:100%;
+		padding:0;
+		margin: 0 0 30px 0;
+	}
+	.cuspublicrowBox h4 {
+		font-size:20px;
+	}
+}
+@media only screen and (min-width : 751px) and (max-width : 767px) {
+	.cusSecpublic h2 {
+		font-size:24px;
+	}
+	.cusSecpublic p {
+		font-size:16px;
+	}
+	.cuspublicrowBoxImg {
+		width:60%;
+	}
+	.cuspublicrowBoxImg {
+		min-height:330px;
+	}
+	.cuspublicrowBox {
+		width:100%;
+		padding:0;
+		margin: 0 0 30px 0;
+	}
+	.cuspublicrowBox h4 {
+		font-size:20px;
+	}
+}
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+	.cusSecpublic h2 {
+		font-size:24px;
+	}
+	.cusSecpublic p {
+		font-size:16px;
+	}
+	.cuspublicrowBoxImg {
+		min-height:150px;
+	}
+	.cuspublicrowBox {
+		margin: 0 0 30px 0;
+	}
+	.cuspublicrowBox h4 {
+		font-size:18px;
+	}
+	.cuspublicrowBox p {
+		font-size:14px;
+	}
+}
+@media only screen and (min-width : 992px) and (max-width : 1100px) {
+	.cusSecpublicmain > p {
+		font-size:19px;
+	}
+}
+@media only screen and (min-width : 1101px) and (max-width : 1300px) {
+}
+</style>
+
+
+
+
+<div class="cusSecpublic">
+  <div class="container">
+    <div class="row">
+    <div class="cusSecpublicmain">
+      <h2><strong>Public datasources</strong></h2>
+      <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <div class="cuspublicrow">
+        	<div class="cuspublicrowBox">
+            	<div class="cuspublicrowBoxImg" style="background:url(../../static/img/sample.jpg);"></div>
+                <div class="cuspublicrowBoxcnt">
+
+                <h4><a href="javascript:script:void(0);">What is Lorem Ipsum?</a></h4>
+                <p><a href="javascript:script:void(0);">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</a></p>
+                <div class="cususeIt"><a href="javascript:script:void(0);">Use it →</a></div>
+
+                </div>
+            </div>
+            <div class="cuspublicrowBox">
+            	<div class="cuspublicrowBoxImg" style="background:url(../../static/img/sample.jpg);"></div>
+                <div class="cuspublicrowBoxcnt">
+                <h4><a href="javascript:script:void(0);">Why do we use it?</a></h4>
+                <p><a href="javascript:script:void(0);">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</a></p>
+                <div class="cususeIt"><a href="javascript:script:void(0);">Use it →</a></div>
+                </div>
+            </div>
+            <div class="cuspublicrowBox">
+            	<div class="cuspublicrowBoxImg" style="background:url(../../static/img/sample.jpg);"></div>
+                <div class="cuspublicrowBoxcnt">
+                <h4><a href="javascript:script:void(0);">What is Lorem Ipsum?</a></h4>
+                <p><a href="javascript:script:void(0);">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</a></p>
+                <div class="cususeIt"><a href="javascript:script:void(0);">Use it →</a></div>
+                </div>
+            </div>
+            <div class="cuspublicrowBox">
+            	<div class="cuspublicrowBoxImg" style="background:url(../../static/img/sample.jpg);"></div>
+                <div class="cuspublicrowBoxcnt">
+                <h4><a href="javascript:script:void(0);">What is Lorem Ipsum?</a></h4>
+                <p><a href="javascript:script:void(0);">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</a></p>
+                <div class="cususeIt"><a href="javascript:script:void(0);">Use it →</a></div>
+                </div>
+            </div>
+
+            <div class="cuspublicrowBox">
+              <div class="cuspublicrowBoxImg" style="background:url(../../static/img/sample.jpg);"></div>
+                <div class="cuspublicrowBoxcnt">
+                <h4><a href="javascript:script:void(0);">What is Lorem Ipsum?</a></h4>
+                <p><a href="javascript:script:void(0);">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</a></p>
+                <div class="cususeIt"><a href="javascript:script:void(0);">Use it →</a></div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{%- endmacro %}
