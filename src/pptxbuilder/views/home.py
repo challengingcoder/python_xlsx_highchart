@@ -15,6 +15,9 @@ class HomeIndex(MethodView):
 class About(MethodView):
     def get(self):
         return render_template('about/index.jinja2')
+class Blog(MethodView):
+    def get(self):
+        return render_template('blog/index.jinja2')
 
 class BugReport(MethodView):
     def get(self):
@@ -46,4 +49,5 @@ class BugReport(MethodView):
 
 home_bp.add_url_rule('/', view_func=HomeIndex.as_view('index'))
 home_bp.add_url_rule('/about', view_func=About.as_view('about'))
+home_bp.add_url_rule('/blog', view_func=Blog.as_view('blog'))
 home_bp.add_url_rule('/get-in-touch', view_func=BugReport.as_view('bugReport'))
