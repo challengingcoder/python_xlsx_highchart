@@ -313,20 +313,20 @@ h1.block-title{
 .more-link{
 	margin-top:12px;
 }
-#datasources-list img{
+#blog-list img{
 	width:100%;
 }
-#datasources-list img-container{
+#blog-list img-container{
 	border-radius:15px;
 }
-#datasources-list h3 a, #datasources-list .subtitle a{
+#blog-list h3 a, #blog-list .subtitle a{
 	color:inherit;
 }
 @media (max-width: 990px){
 		.more-link{margin-bottom:20px;}
 }
 @media (min-width: 320px) and (max-width: 768px) {
-	.datasource-container{
+	.blog-container{
 
 	}
 }
