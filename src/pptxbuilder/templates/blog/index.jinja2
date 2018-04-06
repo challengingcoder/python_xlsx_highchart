@@ -2,13 +2,13 @@
 {% import 'partial/header.jinja2' as header %}
 {% import 'partial/footer.jinja2' as footer %}
 
-{% import 'partial/sections/blogList.jinja2' as blogList %}
+{% import 'partial/sections/blogPostOne.jinja2' as blogPostOne %}
 
 {% block content %}
 
     {{ header.render() }}
 
-    {{ blogList.render() }}
+    {{ blogPostOne.render() }}
 
     {{ footer.render() }}
 
