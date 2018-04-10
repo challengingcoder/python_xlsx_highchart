@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, url_for
+from flask import Flask, url_for, request, redirect
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
 
@@ -56,6 +56,22 @@ def __run_server():
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(host='0.0.0.0', port=5000, threaded=True)
+
+
+if os.environ.get('PYTHONPRODUCTION', None) is not None:
+    # Production, redirect
+    @app.before_request
+    def before_request():
+        if request.url.startswith('https://pptxbuilder.com'):
+            url = request.url.replace(
+                'https://pptxbuilder.com', 'https://www.pptxbuilder.com', 1)
+            code = 301
+            return redirect(url, code=code)
+
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
 
 
 __flask_setup()
