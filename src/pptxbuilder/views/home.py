@@ -25,7 +25,7 @@ class BugReport(MethodView):
     def post(self):
 
         if os.environ.get('BUG_SEND_TO_EMAIL', None) is None:
-            bug_send_to_email = 'pptxbuilder@gmail.com'
+            bug_send_to_email = 'info@pptxbuilder.com'
         else:
             bug_send_to_email = os.environ.get('BUG_SEND_TO_EMAIL')
         contact_name = request.form.get('contactName')
