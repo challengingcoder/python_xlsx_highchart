@@ -28,7 +28,7 @@
   height: calc(100% - 80px);
 }
 .footer-links{
-  color: rgba(116, 119, 123, .5);
+  color: rgba(116, 119, 123, .9);
 }
 a:hover{
   color: #0374d8 !important;
