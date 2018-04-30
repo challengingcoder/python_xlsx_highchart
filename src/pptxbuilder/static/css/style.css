@@ -5,7 +5,24 @@ body {
   left: 0;
   top: 0; }
 
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  padding: 15px 10px 0 10px;
+  height: 80px; }
+  .header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 3rem; }
+    .header h3 a {
+      color: #636c72; }
+  .header ul.nav {
+    margin-top: 4px; }
 
+.footer {
+  padding-top: 1.5rem;
+  color: #777;
+  border-top: .05rem solid #e5e5e5; }
 
 .wrapper {
   width: 100%;
@@ -16,17 +33,15 @@ body {
   margin: 50px 40px;
   text-align: center; }
   .wrapper.home .explainer .item {
-    display: inline-flex;
+    display: inline-block;
     width: 140px;
-    height: 140px;
+    height: 100px;
     line-height: 100px;
     padding: 0 10px;
-    border-radius: 50%;
-    background: #ffffff;
+    border-radius: 10px;
+    background: #eceeef;
     color: #555556;
-    vertical-align: top;
-    justify-content: center;
-    align-items: center; }
+    vertical-align: top; }
     .wrapper.home .explainer .item span {
       display: inline-block;
       vertical-align: middle;
@@ -41,30 +56,26 @@ body {
       font-weight: bold;
       color: #c6c6c9; }
     .wrapper.home .explainer .item:not(.after) {
-      -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-      -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
+      -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
 .wrapper.home .upload-area {
   text-align: center;
-  background: #ffffff;
+  background: #eceeef;
   color: #a9aaab;
   border-radius: 6px;
   box-sizing: border-box;
-  padding: 70px;
-  width: 590px;
+  padding: 30px;
+  width: 480px;
   margin: 0 auto 20px auto;
-  /* -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; */
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  /* box-shadow: 0 1px 4px rgb(27, 28, 29), 0 0 40px rgba(11, 11, 11, 0.4) inset; */
-  border: 1px dashed #b6b6b6;
-}
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
   .wrapper.home .upload-area .upload-icon .fa {
     font-size: 120px; }
   .wrapper.home .upload-area .upload-text {
     margin: 0;
-    font-size: 18px;
-  margin-top: 50px;
-}
+    font-size: 18px; }
   .wrapper.home .upload-area:hover {
     cursor: pointer; }
     .wrapper.home .upload-area:hover .upload-icon .fa {
@@ -161,9 +172,5 @@ body {
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
-
-
-
-/* new styles  */
 
 /*# sourceMappingURL=style.css.map */

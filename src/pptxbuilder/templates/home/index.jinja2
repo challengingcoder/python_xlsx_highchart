@@ -3,6 +3,7 @@
 {% import 'partial/footer.jinja2' as footer %}
 
 {% import 'partial/sections/firstTopSection.jinja2' as firstSection %}
+{% import 'partial/sections/features.jinja2' as features %}
 {% import 'partial/sections/howItWorksSection.jinja2' as howItWorksSection %}
 {% import 'partial/sections/uploadSection.jinja2' as uploadSection %}
 {% import 'partial/sections/whyUseSection.jinja2' as whyUseSection %}
@@ -16,8 +17,8 @@
 
 
     {{ header.render() }}
-
     {{ firstSection.render() }}
+    {{ features.render() }}
     {{ howItWorksSection.render() }}
     {{ uploadSection.render() }}
     {{ whyUseSection.render() }}
