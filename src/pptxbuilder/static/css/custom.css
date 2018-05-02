@@ -315,8 +315,13 @@ h1.block-title{
 }
 #blog-list img{
 	width:100%;
+    display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+
 }
-#blog-list img-container{
+#blog-list .img-container{
 	border-radius:15px;
 }
 #blog-list h3 a, #blog-list .subtitle a{

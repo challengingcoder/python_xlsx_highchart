@@ -18,9 +18,12 @@ class About(MethodView):
 class Features(MethodView):
     def get(self):
         return render_template('features/index.jinja2')
-class Blog(MethodView):
+class Blog_1(MethodView):
     def get(self):
-        return render_template('blog/index.jinja2')
+        return render_template('blog/index_1.jinja2')
+class Blog_2(MethodView):
+    def get(self):
+        return render_template('blog/index_2.jinja2')
 
 class BugReport(MethodView):
     def get(self):
@@ -53,5 +56,8 @@ class BugReport(MethodView):
 home_bp.add_url_rule('/', view_func=HomeIndex.as_view('index'))
 home_bp.add_url_rule('/about', view_func=About.as_view('about'))
 home_bp.add_url_rule('/features', view_func=Features.as_view('features'))
-home_bp.add_url_rule('/automate-your-powerpoint-presentations', view_func=Blog.as_view('blog'))
+home_bp.add_url_rule('/automate-your-powerpoint-presentations', view_func=Blog_1.as_view('blog_1'))
+home_bp.add_url_rule('/power-point-automation-will-make-your-life-easier', view_func=Blog_2.as_view('blog_2'))
+
+
 home_bp.add_url_rule('/get-in-touch', view_func=BugReport.as_view('bugReport'))
