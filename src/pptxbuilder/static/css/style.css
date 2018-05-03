@@ -173,4 +173,23 @@ body {
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
 
+.d, .d * {
+  outline: 1px solid red; }
+
+.blog-list {
+  display: block;
+  width: 100%; }
+  .blog-list__col {
+    padding: 0 25px 0 15px;
+    float: left;
+    width: 33%; }
+    @media only screen and (max-width: 480px) {
+      .blog-list__col {
+        float: none;
+        clear: both;
+        width: 100%;
+        padding: 25px 10px; } }
+    .blog-list__col .img-container img {
+      object-fit: cover; }
+
 /*# sourceMappingURL=style.css.map */

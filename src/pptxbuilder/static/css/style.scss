@@ -277,4 +277,26 @@ body {
   }
 }
 
+.d, .d *{
+  outline: 1px solid red;
+}
+
+.blog-list{
+  display: block;
+  width: 100%;
+  &__col{
+    padding: 0 25px 0 15px ;
+    float: left;
+    width: 33%;
+    @media only screen and (max-width: 480px) {
+      float: none;
+      clear: both;
+      width: 100%;
+      padding: 25px 10px ;
+    }
+    .img-container img{
+      object-fit: cover;
+    }
+  }
+}
 
