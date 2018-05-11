@@ -1,3 +1,8 @@
+"""
+This module is imported from run.py in the root directory
+"""
+
+
 import os
 
 from flask import Flask, url_for, request, redirect
