@@ -281,6 +281,18 @@ body {
   outline: 1px solid red;
 }
 
+.app-block-footer{
+  h6{
+    a{
+      color: #ffffff;
+      text-decoration: none;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
 .blog-list{
   display: block;
   width: 100%;

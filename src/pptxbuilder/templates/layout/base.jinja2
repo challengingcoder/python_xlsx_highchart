@@ -72,6 +72,27 @@
         }
       }
     </style>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#f6f6f6",
+          "text": "#5c7291"
+        },
+        "button": {
+          "background": "#0374d8",
+          "text": "#ffffff"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "href": "/cookies"
+      },
+    })});
+    </script>
 </head>
 <body>
 {% block content %}{% endblock content %}
